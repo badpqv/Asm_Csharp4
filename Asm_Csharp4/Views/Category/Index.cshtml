@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Index - QL Danh mục";
+}
+@model IEnumerable<Categories>
+<h1 class="display-4 text-center text-danger">Quản lý danh mục</h1>
+<a asp-action="Create" class="btn btn-outline-info">Thêm danh mục mới</a>
+<hr />
+<span>@Html.Raw(@ViewData["Error"])</span>
+<table class="table table-bordered table-striped align-middle text-wrap table-light border-danger">
+    <thead class="table-danger">
+        <tr class="text-center">
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody >
+        @{
+            foreach (var item in Model)
+            {
+                <tr class="text-center font-weight-bolder">
+                    <td class="align-middle text-info">@Html.DisplayFor(model => item.Name)</td>
+
+                    <td>
+                        <a asp-action="Details" class="btn btn-outline-info btn-sm" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Edit" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Sửa TT danh mục</a>
+                        <a asp-action="Delete" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Xoá danh mục</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

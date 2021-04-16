@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Create - QLND";
+}
+@model Customers
+
+<h1 class="text-danger">Thêm sản phẩm mới</h1>
+<form asp-action="Create" autocomplete="off" class="form-group needs-validation" >
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="FullName"></label>
+            <input asp-for="FullName" class="form-control" required />
+            <span class="invalid-feedback">Mời nhập tên người dùng</span>
+            <label asp-for="TaiKhoan"></label>
+            <input asp-for="TaiKhoan" class="form-control" required />
+            <span class="invalid-feedback">Mời nhập tên tài khoản</span>
+            <label asp-for="MatKhau"></label>
+            <input asp-for="MatKhau" class="form-control" required />
+            <span class="invalid-feedback">Mời nhập mật khẩu</span>
+            <label asp-for="Quyen"></label>
+            <input asp-for="Quyen" class="form-control" list="datalistOptions" required />
+            <datalist id="datalistOptions">
+                <option value="Người dùng" />
+                <option value="Admin" />
+            </datalist>
+            <span class="invalid-feedback">Mời nhập quyền</span>
+
+        </div>
+    </div>
+
+    <br />
+    <input type="submit" class="btn btn-primary" value="Thêm" />
+    <a asp-action="Index" class="nav-link">Back to list</a>
+</form>

@@ -1,0 +1,13 @@
+﻿@model Products
+@{
+    ViewData["Title"] = "Details - QLSP";
+}
+<h1 class="text-danger">Details</h1>
+<h3 class="text-info">Thông tin sản phẩm</h3>
+<hr/>
+<partial name="_PartialProductDetails" model="Model"/>
+<br/>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a><br/>
+    <a asp-action="Index" class="nav-link">Back to list</a>
+</div>

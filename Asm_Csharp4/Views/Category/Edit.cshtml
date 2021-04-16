@@ -1,0 +1,23 @@
+﻿@model Categories
+@{
+    ViewData["Title"] = "Edit - QL Danh mục";
+}
+<h1 class="text-danger">Edit</h1>
+<h3 class="text-info">Sửa TT danh mục</h3>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name"></span>
+            </div>
+          <br/>
+            <input type="submit" value="Cập nhật" class="btn btn-primary"/><br/>
+            <a asp-action="Index">Back to list  </a>
+        </form>
+    </div>
+</div>

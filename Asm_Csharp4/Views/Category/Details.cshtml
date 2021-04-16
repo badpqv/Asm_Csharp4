@@ -1,0 +1,23 @@
+﻿@model Categories
+@{
+    ViewData["Title"] = "Details - QL Danh mục";
+}
+<h1 class="text-danger">Details</h1>
+<h3 class="text-info">Thông tin danh mục</h3>
+<hr/>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model=>model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model=>model.Name)
+        </dd>
+      
+    </dl>
+</div>
+<br/>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a><br/>
+    <a asp-action="Index" class="nav-link">Back to list</a>
+</div>

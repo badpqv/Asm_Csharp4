@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Create - QL Danh mục";
+}
+@model Categories
+
+<h1 class="text-danger">Thêm danh mục mới</h1>
+<form asp-action="Create" autocomplete="off" class="form-group">
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-primary" value="Thêm" />
+    <a asp-action="Index" class="nav-link">Back to list</a>
+</form>

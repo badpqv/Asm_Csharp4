@@ -1,0 +1,15 @@
+﻿@model Products
+@{
+    ViewData["Title"] = "Home Page - Details Sản phẩm";
+}
+<h1>Details</h1>
+<h3>Thông tin sản phẩm</h3>
+<hr />
+<partial name="_PartialProductDetails" model="Model"/>
+<br />
+<div class="row">
+    <div class="col">
+        <a asp-action="Index" class="btn btn-primary">Mua</a>
+        <a asp-action="Index" class="nav-link">Về trang chủ</a>
+    </div>
+</div>
