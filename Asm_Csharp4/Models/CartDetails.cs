@@ -9,14 +9,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Asm_Csharp4.Models
 {
-    public partial class Cart
+    [Table("Cart_details")]
+    public partial class CartDetails
     {
-        [Key]
-        public int Id { get; set; }
-        [StringLength(200)]
-        public string ProductName { get; set; }
-        [Column(TypeName = "decimal(18, 0)")]
-        public decimal? Price { get; set; }
-        public int? Quantity { get; set; }
+        public int? MaSp { get; set; }
+        public int? MaCart { get; set; }
+
+        [ForeignKey(nameof(MaCart))]
+        public virtual Cart MaCartNavigation { get; set; }
+        [ForeignKey(nameof(MaSp))]
+        public virtual Products MaSpNavigation { get; set; }
     }
 }

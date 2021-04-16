@@ -21,6 +21,7 @@ namespace Asm_Csharp4.Context
         }
 
         public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<CartDetails> CartDetails { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Products> Products { get; set; }
@@ -36,11 +37,19 @@ namespace Asm_Csharp4.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cart>(entity =>
+            modelBuilder.Entity<CartDetails>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasOne(d => d.MaCartNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.MaCart)
+                    .HasConstraintName("FK_Cartdetails_Cart");
+
+                entity.HasOne(d => d.MaSpNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.MaSp)
+                    .HasConstraintName("FK_Cartdetails_Products");
             });
 
             modelBuilder.Entity<Products>(entity =>
