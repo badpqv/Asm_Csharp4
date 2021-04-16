@@ -11,12 +11,23 @@ namespace Asm_Csharp4.Models
 {
     public partial class Cart
     {
+        public Cart()
+        {
+            CartDetails = new HashSet<CartDetails>();
+        }
+
         [Key]
         public int Id { get; set; }
         [StringLength(200)]
+        [Display(Name = "Tên sản phẩm")]
         public string ProductName { get; set; }
+        [Display(Name = "Đơn giá")]
         [Column(TypeName = "decimal(18, 0)")]
         public decimal? Price { get; set; }
+        [Display(Name = "Số lượng")]
         public int? Quantity { get; set; }
+
+        [InverseProperty("MaCartNavigation")]
+        public virtual ICollection<CartDetails> CartDetails { get; set; }
     }
 }

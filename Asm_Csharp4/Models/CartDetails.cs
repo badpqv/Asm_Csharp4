@@ -12,12 +12,16 @@ namespace Asm_Csharp4.Models
     [Table("Cart_details")]
     public partial class CartDetails
     {
-        public int? MaSp { get; set; }
-        public int? MaCart { get; set; }
+        [Key]
+        public int MaSp { get; set; }
+        [Key]
+        public int MaCart { get; set; }
 
         [ForeignKey(nameof(MaCart))]
+        [InverseProperty(nameof(Cart.CartDetails))]
         public virtual Cart MaCartNavigation { get; set; }
         [ForeignKey(nameof(MaSp))]
+        [InverseProperty(nameof(Products.CartDetails))]
         public virtual Products MaSpNavigation { get; set; }
     }
 }

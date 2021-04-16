@@ -39,16 +39,19 @@ namespace Asm_Csharp4.Context
         {
             modelBuilder.Entity<CartDetails>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.MaSp, e.MaCart })
+                    .HasName("PK_cartdetails");
 
                 entity.HasOne(d => d.MaCartNavigation)
-                    .WithMany()
+                    .WithMany(p => p.CartDetails)
                     .HasForeignKey(d => d.MaCart)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cartdetails_Cart");
 
                 entity.HasOne(d => d.MaSpNavigation)
-                    .WithMany()
+                    .WithMany(p => p.CartDetails)
                     .HasForeignKey(d => d.MaSp)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cartdetails_Products");
             });
 
