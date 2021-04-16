@@ -27,7 +27,6 @@ namespace Asm_Csharp4.Models
         public string Description { get; set; }
         [Display(Name = "Đơn giá")]
         [Column(TypeName = "money")]
-        [RegularExpression(@"^\d$",ErrorMessage = "Chỉ được phép nhập số")]
         public decimal? Price { get; set; }
         [Display(Name = "Hình ảnh")]
         [StringLength(100)]

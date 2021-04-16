@@ -34,13 +34,13 @@ namespace Asm_Csharp4.Controllers
                 return View();
             }
         }
-
-        public int isExist(string name)
+        [NonAction]
+        public int IsExist(string name)
         {
             try
             {
                 var cart = _iCartService.GetListCart();
-                for (int i = 0; i < cart.Count; i++)
+                for (var i = 0; i < cart.Count; i++)
                 {
                     if (_iCartService.FindExistProduct(name))
                     {
@@ -56,37 +56,45 @@ namespace Asm_Csharp4.Controllers
                 return -1;
             }
         }
-
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (_iCartService.CheckCartId(id))
+                    {
+                        _iCartService.Delete(id);
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction(nameof(Index));
+                ;
+            }
+        }
         public IActionResult Buy(string name,decimal price,Cart carts)
         {
-            Console.WriteLine("Name: "+name);
-            Console.WriteLine("Price: "+price);
             if (_iCartService.GetListCart().Count == 0)
             {
-                carts = new Cart();
-                carts.ProductName = name;
-                carts.Price = price;
-                carts.Quantity = 1;
+                carts = new Cart {ProductName = name, Price = price, Quantity = 1};
                 _iCartService.AddCart(carts);
             }
             else
             {
-                var cart = _iCartService.GetListCart();
-                int index = isExist(name);
+                var soLuong = _iCartService.GetCurrentQuantity(name);
+                int index = IsExist(name);
                 if (index != -1)
                 {
-                    carts = new Cart();
-                    carts.ProductName = name;
-                    carts.Price = price;
-                    carts.Quantity = cart[index].Quantity;
-                   _iCartService.UpdateQuantity(carts);
+                    carts = new Cart {ProductName = name, Price = price, Quantity = soLuong};
+                    carts.Quantity++;
+                _iCartService.UpdateQuantity(carts);
                 }
                 else
                 {
-                    carts = new Cart();
-                    carts.ProductName = name;
-                    carts.Price = price;
-                    carts.Quantity = 1;
+                    carts = new Cart {ProductName = name, Price = price, Quantity = 1};
                     _iCartService.AddCart(carts);
                 }
             }

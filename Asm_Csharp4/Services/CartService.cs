@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Asm_Csharp4.Services
 {
@@ -39,15 +40,34 @@ namespace Asm_Csharp4.Services
         public void UpdateQuantity(Cart carts)
         {
             var cart = _context.Cart.FirstOrDefault(c=>c.ProductName == carts.ProductName);
-            Console.WriteLine("ProName: " +cart.ProductName);
-            cart.Quantity = carts.Quantity+1;
+            cart.Quantity = carts.Quantity;
             _context.Cart.Update(cart);
             _context.SaveChanges();
+            
+        }
+
+        public int? GetCurrentQuantity(string name)
+        {
+            var cart = _context.Cart.Where(c => c.ProductName == name).Select(c => c.Quantity).FirstOrDefault();
+            return cart;
+        }
+
+        public bool CheckCartId(int id)
+        {
+            return _context.Cart.Any(c => c.Id == id);
         }
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            var cart = _context.Cart.FirstOrDefault(c => c.Id == id);
+            if (cart != null)
+            {
+                _context.Cart.Remove(cart);
+                _context.SaveChanges();
+                return 0;
+            }
+
+            return -1;
         }
     }
 }

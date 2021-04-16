@@ -17,8 +17,8 @@
         @{
             foreach (var item in Model)
             {
-                <tr class="text-center font-weight-bolder">
-                    <td class="align-middle text-info">@Html.DisplayFor(model => item.Name)</td>
+                <tr class="text-center fw-bolder align-middle">
+                    <td class="text-info">@Html.DisplayFor(model => item.Name)</td>
 
                     <td>
                         <a asp-action="Details" class="btn btn-outline-info btn-sm" asp-route-id="@item.Id">Details</a>

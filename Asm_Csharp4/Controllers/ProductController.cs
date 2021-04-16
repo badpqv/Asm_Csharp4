@@ -24,9 +24,10 @@ namespace Asm_Csharp4.Controllers
         //Index có tìm kiếm
         public IActionResult Index(string name,bool notUsed)
         {
+            ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
             try
             {
-                if (name != null)
+                if (name != null )
                 {
                     var product = _iProductService.FindByName(name);
                     return View(product);

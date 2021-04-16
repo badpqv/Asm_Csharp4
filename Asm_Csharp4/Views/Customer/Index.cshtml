@@ -15,15 +15,15 @@
         <th>Actions</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="align-middle">
     @{
         foreach (var item in Model)
         {
-            <tr class="font-weight-bolder">
-                <td class="align-middle text-info">@Html.DisplayFor(model=>item.FullName)</td>
-                <td class="align-middle text-danger">@Html.DisplayFor(model=>item.TaiKhoan)</td>
-                <td class="align-middle text-success">@Html.DisplayFor(model=>item.MatKhau)</td>
-                <td class="align-middle text-info font-italic">@Html.DisplayFor(model=>item.Quyen)</td>
+            <tr class="fw-bolder">
+                <td class="text-info">@Html.DisplayFor(model=>item.FullName)</td>
+                <td class="text-danger">@Html.DisplayFor(model=>item.TaiKhoan)</td>
+                <td class="text-success">@Html.DisplayFor(model=>item.MatKhau)</td>
+                <td class="text-info fst-italic">@Html.DisplayFor(model=>item.Quyen)</td>
                 <td class="align-middle">
                     <a asp-action="Details" class="btn btn-outline-info btn-sm" asp-route-id="@item.Id">Details</a>
                     <a asp-action="Edit" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Sửa TT người dùng</a>

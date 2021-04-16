@@ -9,7 +9,7 @@
         foreach (var item in Model)
         {
             <div class="col-sm-2">
-                <div class="card text-truncate mt-3">
+                <div class="card text-truncate border-success mb-3">
                     <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top" alt="Product Image" width="20"/>
                     <div class="card-body">
                         <h5 class="card-title text-transition">@Html.DisplayFor(model => item.Name)</h5>
@@ -20,7 +20,7 @@
 
                         <p class="card-text text-success">Giá: <span class="text-info"> @Html.DisplayFor(model => item.Price)</span> $</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer bg-transparent  border-success">
                         <a asp-action="Buy" asp-controller="Cart" asp-route-name="@item.Name" asp-route-price="@item.Price" class="btn btn-success float-left">Mua</a>
                         <a asp-action="Details" class="btn btn-outline-info float-right" asp-route-id="@item.Id">Details</a>
                     </div>
