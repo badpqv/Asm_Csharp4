@@ -5,37 +5,48 @@
 
 <h1 class="display-4 text-center text-danger">Quản lý sản phẩm</h1>
 <a asp-action="Create" class="btn btn-outline-info">Thêm sản phẩm mới</a>
+<form asp-action="Index" asp-controller="Product"  autocomplete="off" method="get">
+    <div class="row">
+        <div class="col-sm-4">
+            <input type="text" name="name" class="form-control" />
+        </div>
+        <div class="col-sm-4">
+            <input type="submit" value="Search" class="btn btn-info" />
+        </div>
+    </div>
+</form>
+<br />
 <hr />
 <div class="table table-responsive">
     <table class="table table-bordered table-striped text-wrap align-middle text-center border-warning table-sm">
-    <thead class="table-warning">
-        <tr>
-            <th >@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Description)</th>
-            <th>@Html.DisplayNameFor(model => model.Price)</th>
-            <th>@Html.DisplayNameFor(model => model.Image)</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody >
-        @{
-            foreach (var item in Model)
-            {
-                <tr class="font-weight-bolder">
-                    <td class="align-middle text-info">@Html.DisplayFor(model => item.Name)</td>
-                    <td class="align-middle text-danger">@Html.DisplayFor(model => item.Description)</td>
-                    <td class="align-middle text-success font-italic">@Html.DisplayFor(model => item.Price)</td>
-                    <td class="align-middle">
-                        <img src="@Html.DisplayFor(model=>item.Image)" width="75" />
-                    </td>
-                    <td class="align-middle">
-                        <a asp-action="Details" class="btn btn-outline-info btn-sm" asp-route-id="@item.Id">Details</a>
-                        <a asp-action="Edit" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Sửa TT sản phẩm</a>
-                        <a asp-action="Delete" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Xoá Sản phẩm</a>
-                    </td>
-                </tr>
+        <thead class="table-warning">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Image)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr class="font-weight-bolder">
+                        <td class="align-middle text-info">@Html.DisplayFor(model => item.Name)</td>
+                        <td class="align-middle text-danger">@Html.DisplayFor(model => item.Description)</td>
+                        <td class="align-middle text-success font-italic">@Html.DisplayFor(model => item.Price)</td>
+                        <td class="align-middle">
+                            <img src="@Html.DisplayFor(model=>item.Image)" width="75" />
+                        </td>
+                        <td class="align-middle">
+                            <a asp-action="Details" class="btn btn-outline-info btn-sm" asp-route-id="@item.Id">Details</a>
+                            <a asp-action="Edit" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Sửa TT sản phẩm</a>
+                            <a asp-action="Delete" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Xoá Sản phẩm</a>
+                        </td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </div>

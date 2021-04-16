@@ -16,7 +16,7 @@
 <body>
     <div class="root">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-danger flex-column fixed-top  py-0">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-danger flex-column sticky-top  py-0">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="~/favicon.png" width="50"> Phạm Việt
@@ -41,7 +41,9 @@
                             </li>
                         </ul>
                         <div class="d-flex">
+                            <a asp-action="Index" asp-controller="Cart" class="btn btn-outline-danger">
                                 <img src="~/images/logo.jpg" class="rounded-circle" width="30" />
+                            </a>
                         </div>
                     </div>
                 </div>

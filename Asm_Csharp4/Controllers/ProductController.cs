@@ -8,6 +8,7 @@ using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Asm_Csharp4.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asm_Csharp4.Controllers
 {
@@ -20,20 +21,29 @@ namespace Asm_Csharp4.Controllers
             _context = context;
             _iProductService = new ProductService(_context);
         }
-        public IActionResult Index()
+        //Index có tìm kiếm
+        public IActionResult Index(string name,bool notUsed)
         {
             try
             {
-                var lstProducts = _iProductService.GetListProduct();
-                return View(lstProducts);
+                if (name != null)
+                {
+                    var product = _iProductService.FindByName(name);
+                    return View(product);
+                }
+                else
+                {
+                    var product = _iProductService.GetListProduct();
+                    return View(product);
+                }
             }
             catch (Exception e)
             {
                 return View();
             }
+
         }
 
-      
         [HttpGet]
         public IActionResult Details(int? id)
         {
@@ -71,7 +81,7 @@ namespace Asm_Csharp4.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (DbUpdateException e)
             {
                 ViewData["Error"] = "<script>alert('Thêm sản phẩm thất bại!')</script>";
                 return View(product);
@@ -101,6 +111,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+                ViewData["Error"] = "<script>alert('Sửa sản phẩm thất bại!')</script>";
                 return View(product);
             }
         }

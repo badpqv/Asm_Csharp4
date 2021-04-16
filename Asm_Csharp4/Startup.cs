@@ -54,7 +54,7 @@ namespace Asm_Csharp4
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action}/{id?}",
+                    pattern: "{controller}/{action}/{name?}",
                     defaults:new {controller="Home",action="Index" }
                 );
                    

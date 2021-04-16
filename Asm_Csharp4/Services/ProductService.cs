@@ -31,7 +31,8 @@ namespace Asm_Csharp4.Services
 
         public List<Products> FindByName(string name)
         {
-           var productsList = this.lstProducts.Where(c => c.Name.Contains(name)).ToList();
+            var productsList = _context.Products.Where(c => c.Name.Contains(name)).ToList();
+            Console.WriteLine(_context.Products.Where(c => c.Name.Contains(name)).ToString());
             return productsList;
         }
 

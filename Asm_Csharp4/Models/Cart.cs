@@ -24,8 +24,9 @@ namespace Asm_Csharp4.Models
         [Display(Name = "Đơn giá")]
         [Column(TypeName = "decimal(18, 0)")]
         public decimal? Price { get; set; }
-        [Display(Name = "Số lượng")]
-        public int? Quantity { get; set; }
+
+        [Display(Name = "Số lượng")] 
+        public int? Quantity { get; set; } = 0;
 
         [InverseProperty("MaCartNavigation")]
         public virtual ICollection<CartDetails> CartDetails { get; set; }

@@ -21,7 +21,7 @@
                         <p class="card-text text-success">Giá: <span class="text-info"> @Html.DisplayFor(model => item.Price)</span> $</p>
                     </div>
                     <div class="card-footer">
-                        <a asp-action="Index" class="btn btn-success float-left">Mua</a>
+                        <a asp-action="Buy" asp-controller="Cart" asp-route-name="@item.Name" asp-route-price="@item.Price" class="btn btn-success float-left">Mua</a>
                         <a asp-action="Details" class="btn btn-outline-info float-right" asp-route-id="@item.Id">Details</a>
                     </div>
                 </div>
