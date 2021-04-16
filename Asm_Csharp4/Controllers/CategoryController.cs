@@ -31,6 +31,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return View();
             }
         }
@@ -52,7 +53,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name")] Categories category)
+        public IActionResult Create([Bind("Name")] Categories category)
         {
             try
             {
@@ -68,6 +69,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return View(category);
             }
         }
@@ -80,7 +82,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost,ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCategory(Categories category)
+        public IActionResult EditCategory(Categories category)
         {
             try
             {
@@ -93,6 +95,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return View(category);
             }
         }
@@ -120,6 +123,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (DbUpdateException e)
             {
+                Console.WriteLine(e);
                 return RedirectToAction("Index");
             }
         }

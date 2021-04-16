@@ -21,30 +21,29 @@ namespace Asm_Csharp4.Controllers
             _context = context;
             _iProductService = new ProductService(_context);
         }
-        //Index có tìm kiếm
-        public IActionResult Index(string name,bool notUsed)
+        //Index có tìm kiếm theo tên
+        public IActionResult Index(string name)
         {
             ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
             try
             {
-                if (name != null )
+                if (!String.IsNullOrEmpty(name))
                 {
-                    var product = _iProductService.FindByName(name);
-                    return View(product);
+                    var lstProducts = _iProductService.GetListProduct().Where(c => c.Name == name).ToList();
+                    return View(lstProducts);
                 }
                 else
                 {
-                    var product = _iProductService.GetListProduct();
-                    return View(product);
+                    var lstProducts = _iProductService.GetListProduct();
+                    return View(lstProducts);
                 }
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return View();
             }
-
         }
-
         [HttpGet]
         public IActionResult Details(int? id)
         {
@@ -68,7 +67,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name", "Description", "Price", "Image","CategoryId")] Products product)
+        public IActionResult Create([Bind("Name", "Description", "Price", "Image","CategoryId")] Products product)
         {
             try
             {
@@ -84,6 +83,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (DbUpdateException e)
             {
+                Console.WriteLine(e);
                 ViewData["Error"] = "<script>alert('Thêm sản phẩm thất bại!')</script>";
                 return View(product);
             }
@@ -99,7 +99,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost,ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProduct(Products product)
+        public IActionResult EditProduct(Products product)
         {
             try
             {
@@ -112,6 +112,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 ViewData["Error"] = "<script>alert('Sửa sản phẩm thất bại!')</script>";
                 return View(product);
             }
@@ -125,7 +126,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public IActionResult DeleteProduct(int id)
         {
             try
             {
@@ -141,6 +142,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return RedirectToAction("Index");
             }
         }

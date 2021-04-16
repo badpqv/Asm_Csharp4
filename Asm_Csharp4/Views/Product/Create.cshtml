@@ -5,29 +5,31 @@
 @model Products
 
 <h1 class="text-danger">Thêm sản phẩm mới</h1>
-<form asp-action="Create" autocomplete="off" class="form-group">
+<form asp-action="Create" autocomplete="off" class="row g-3 needs-validation" novalidate>
     <div class="row">
         <div class="col-md-4">
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" required/>
+            <input asp-for="Name" class="form-control" id="validationCustom01" required/>
             <label asp-for="Description"></label>
-            <input asp-for="Description" class="form-control" required/>
+            <input asp-for="Description" class="form-control" id="validationCustom02" required/>
         </div>
         <div class="col-md-4">
             <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" required/>
+            <input asp-for="Price" class="form-control" id="validationCustom03" required/>
             <label asp-for="Image"></label>
-            <input asp-for="Image" class="form-control"required />
+            <input asp-for="Image" class="form-control" id="validationCustom04" required />
         </div>
     </div>
     <div class="row">
         <div class="col-md-8">
             <label asp-for="CategoryId"></label>
-            <select asp-for="CategoryId" class="form-select" asp-items="@ViewBag.DanhMuc" required></select>
+            <select asp-for="CategoryId" class="form-select" asp-items="@ViewBag.DanhMuc"  required></select>
         </div>
     </div>
     <br />
-    <input type="submit" class="btn btn-primary" value="Thêm" />
-    <a asp-action="Index" class="nav-link">Back to list</a>
-    <span>@ViewData["Error"]</span>
+    <div class="col-sm-6">
+        <input type="submit" class="btn btn-primary" value="Thêm" />
+        <a asp-action="Index" class="nav-link">Back to list</a>
+        <span>@ViewData["Error"]</span>
+    </div>
 </form>

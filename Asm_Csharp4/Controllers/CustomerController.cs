@@ -50,7 +50,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FullName", "TaiKhoan", "MatKhau","Quyen")] Customers customer)
+        public IActionResult Create([Bind("FullName", "TaiKhoan", "MatKhau","Quyen")] Customers customer)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost,ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCustomer(Customers customer)
+        public IActionResult EditCustomer(Customers customer)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCustomer(int id)
+        public IActionResult DeleteCustomer(int id)
         {
             try
             {
