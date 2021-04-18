@@ -59,10 +59,9 @@ namespace Asm_Csharp4.Services
         public string Delete(int id)
         {
                 var cart = _context.Carts.FirstOrDefault(c => c.Id == id);
-                var details = _context.CartDetails.FirstOrDefault(c=>c.IdCart == cart.Id);
-            if (details != null)
+            if (cart != null)
             {
-                _context.CartDetails.Remove(details);
+                _context.Carts.Remove(cart);
                 _context.SaveChanges();
                 return "Xoá thành công";
             }

@@ -19,6 +19,7 @@ namespace Asm_Csharp4.Models
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhập tên sản phẩm")]
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
         [Display(Name = "Mô tả")]
@@ -26,11 +27,13 @@ namespace Asm_Csharp4.Models
         public string Description { get; set; }
         [Display(Name = "Đơn giá")]
         [Column(TypeName = "money")]
+        [Required(ErrorMessage = "Nhập giá sản phẩm")]
         public decimal? Price { get; set; }
         [Display(Name = "Hình ảnh")]
         [StringLength(100)]
         public string Image { get; set; }
         [Display(Name = "Danh mục")]
+        [Required(ErrorMessage = "Chọn danh mục sản phẩm")]
         public int? CategoryId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]

@@ -76,9 +76,8 @@ namespace Asm_Csharp4.Controllers
             return View();
         }
 
-        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name", "Description", "Price", "Image", "CategoryId")] Products product)
+        public IActionResult CreateProduct([Bind("Name", "Description", "Price", "Image", "CategoryId")] Products product)
         {
             try
             {
@@ -94,9 +93,8 @@ namespace Asm_Csharp4.Controllers
             }
             catch (DbUpdateException e)
             {
-                Console.WriteLine(e);
-                ViewData["Error"] = "<script>alert('Thêm sản phẩm thất bại!')</script>";
-                return View(product);
+                Console.WriteLine(e.Message);
+                return RedirectToAction(nameof(Index));
             }
         }
         [HttpGet]

@@ -9,16 +9,16 @@
         foreach (var item in Model)
         {
             <div class="col-sm-2">
-                <div class="card text-truncate border-success mb-3">
-                    <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top" alt="Product Image" width="20"/>
-                    <div class="card-body">
+                <div class="card text-truncate border-success mb-3 h-100">
+                        <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top h-50" alt="Product Image" />
+                    <div class="card-body" style="min-height: 5vw">
                         <h5 class="card-title text-transition">@Html.DisplayFor(model => item.Name)</h5>
                         <h6 class="card-subtitle mb-2 text-danger text-transition"
                             title="@Html.DisplayFor(model => item.Description)">
                             @Html.DisplayFor(model => item.Description)
                         </h6>
 
-                        <p class="card-text text-success">Giá: <span class="text-info"> @Html.DisplayFor(model => item.Price)</span> $</p>
+                        <p class="card-text text-success">Giá: <small class="text-info"> @Html.DisplayFor(model => item.Price)</small> $</p>
                     </div>
                     <div class="card-footer bg-transparent  border-success">
                         <a asp-action="Buy" asp-controller="Cart" asp-route-id="@item.Id" asp-route-name="@item.Name" asp-route-price="@item.Price" class="btn btn-success float-lg-start">Mua</a>
