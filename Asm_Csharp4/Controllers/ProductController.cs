@@ -24,9 +24,9 @@ namespace Asm_Csharp4.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
             try
             {
+                ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
                 var lstProducts = _iProductService.GetListProduct();
                 return View(lstProducts);
             }
@@ -35,25 +35,20 @@ namespace Asm_Csharp4.Controllers
                 return View();
             }
         }
-        [HttpPost,ActionName("Index")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search(string name)
+        [HttpGet]
+        public IActionResult Index(string name, int categoryId)
         {
-            try
+            ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
+            var products = _iProductService.GetListProduct();
+            if (name == null)
             {
-                if (!String.IsNullOrEmpty(name))
-                {
-                    
-                    var lstProducts = _iProductService.GetListProduct().Where(c => c.Name.Contains(name)).ToList();
-                    return View(lstProducts);
-                }
-                return RedirectToAction(nameof(Index));
+                name = "";
             }
-            catch (Exception e)
+            if (!String.IsNullOrEmpty(name) || categoryId != 0)
             {
-                Console.WriteLine(e);
-                return View();
+                products = products.Where(c => c.Name.Contains(name) && c.CategoryId == categoryId).ToList();
             }
+            return View(products);
         }
         [HttpGet]
         public IActionResult Details(int? id)

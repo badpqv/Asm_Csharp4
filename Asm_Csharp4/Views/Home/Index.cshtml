@@ -3,22 +3,21 @@
 }
 <h1 class="display-4 text-uppercase text-danger text-center">Welcome</h1>
 @model IEnumerable<Products>
-<div class="row d-flex justify-content-center">
-   
+<div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center py-5">
     @{
         foreach (var item in Model)
         {
-            <div class="col-sm-2">
-                <div class="card text-truncate border-success mb-3 h-100">
-                        <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top h-50" alt="Product Image" />
-                    <div class="card-body" style="min-height: 5vw">
+            <div class="col">
+                <div class="card text-truncate border-success  h-100">
+                    <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top h-50" alt="Product Image" />
+                    <div class="card-body">
                         <h5 class="card-title text-transition">@Html.DisplayFor(model => item.Name)</h5>
-                        <h6 class="card-subtitle mb-2 text-danger text-transition"
+                        <h6 class="card-subtitle mb-5 text-danger text-transition"
                             title="@Html.DisplayFor(model => item.Description)">
                             @Html.DisplayFor(model => item.Description)
                         </h6>
 
-                        <p class="card-text text-success">Giá: <small class="text-info"> @Html.DisplayFor(model => item.Price)</small> $</p>
+                        <h6 class="card-text text-success text-uppercase">Giá: <span class="text-info fst-italic"> @Html.DisplayFor(model => item.Price)</span> $</h6>
                     </div>
                     <div class="card-footer bg-transparent  border-success">
                         <a asp-action="Buy" asp-controller="Cart" asp-route-id="@item.Id" asp-route-name="@item.Name" asp-route-price="@item.Price" class="btn btn-success float-lg-start">Mua</a>

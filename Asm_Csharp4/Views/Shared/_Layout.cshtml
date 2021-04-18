@@ -10,58 +10,50 @@
     <link rel="icon" type="image/png" sizes="32x32" href="~/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="~/favicons/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="~/favicons/favicon.ico">
-    <link href="~/css/csscustom.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/css/all.css" rel="stylesheet" />
+    <script src="~/js/all.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-danger sticky-lg-top bg-gradient  py-0">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="~/favicon.png" width="50"> Phạm Việt
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                    </li>
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="False">
-                            Quản lí
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Product">Sản phẩm</a></li>
-                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Category">Danh mục</a></li>
-                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Customer">Người dùng</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a asp-action="Index" asp-controller="Cart" class="btn btn-outline-danger">
-                        <img src="~/images/logo.jpg" class="rounded-circle" width="30" />
+<nav class="navbar navbar-expand-md navbar-dark bg-primary bg-gradient sticky-md-top py-1">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="~/images/logo.jpg" class="rounded-circle" width="30"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" asp-controller="Home">Trang chủ</a>
+                </li>
+             
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Quản lý
                     </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <div class="root">
-
-        <div class="container-fluid wrapper">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-        <footer class="border-top text-light text-center bg-info">
-            <div class="container">
-                &reg; 2021 - PHẠM QUỐC VIỆT &trade;
-            </div>
-        </footer>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" asp-controller="Product">Sản phẩm</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" asp-controller="Category">Danh mục</a></li>
+                        <li><hr class="dropdown-divider"/></li>
+                        <li><a class="dropdown-item" asp-controller="Customer">Người dùng</a></li>
+                    </ul>
+                </li>
+            </ul>
+         </div>
     </div>
+</nav>
+<div class="container-fluid">
+    <main>
+        @RenderBody()
+    </main>
+</div>
     <script src="~/js/site.js"></script>
 
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

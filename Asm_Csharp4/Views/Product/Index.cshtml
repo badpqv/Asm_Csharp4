@@ -1,20 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Index - QLSP";
 }
+@using System.Linq
+@using Microsoft.EntityFrameworkCore.Metadata
 @model IEnumerable<Asm_Csharp4.Models.Products>
 
 <h1 class="display-4 text-center text-danger">Quản lý sản phẩm</h1>
 <a asp-action="Create" class="btn btn-outline-info">Thêm sản phẩm mới</a>
 <hr/>
-<form asp-action="Index" asp-controller="Product"  autocomplete="off">
-    <div class="row">
+<form asp-action="Index" autocomplete="off" method="get">
+    <label>Tìm kiếm sản phẩm: </label>
+    <div class="row g-3">
         <div class="col-sm-3">
             <input type="text" name="name" class="form-control" placeholder="Tìm sản phẩm theo tên ..."/>
         </div>
-        <div class="col-sm-3">
-            <input type="submit" value="Search" class="btn btn-info"/>
+        <div class="col-sm-2">
+            <label>Danh mục:</label>
+            <select asp-items="@ViewBag.DanhMuc" name="categoryId" class="form-select">
+                <option value="">...</option>
+            </select>
         </div>
     </div>
+    <br/>
+    <input type="submit" value="Search" class="btn btn-info"/>
 </form>
 <br />
 <hr />
