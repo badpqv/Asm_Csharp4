@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="row">
+    <h1 class="text-center text-danger display-6">Xác nhận thanh toán</h1>
+    <h1 class="text-center text-info display-6">Tổng số tiền bạn phải trả là: <span class="text-success">@ViewBag.total</span></h1>
+</div>
+<div class="justify-content-center">
+    <a class="btn btn-primary" asp-action="ConfirmCheckout">Xác nhận</a>
+    <a class="nav-link" asp-action="Index">Về hoá đơn</a>
+</div>

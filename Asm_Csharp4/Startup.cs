@@ -25,7 +25,7 @@ namespace Asm_Csharp4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(o=>o.EnableEndpointRouting=false);
             services.AddDbContext<DatabaseContext>(c =>
                 c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -50,11 +50,11 @@ namespace Asm_Csharp4
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller}/{action}/{name?}",
+                    template: "{controller}/{action}/{temp?}",
                     defaults:new {controller="Home",action="Index" }
                 );
                    

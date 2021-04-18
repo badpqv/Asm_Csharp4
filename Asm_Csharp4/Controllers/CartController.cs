@@ -7,6 +7,7 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Asm_Csharp4.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asm_Csharp4.Controllers
 {
@@ -14,12 +15,10 @@ namespace Asm_Csharp4.Controllers
     {
         private readonly DatabaseContext _context;
         private ICartService _iCartService;
-        private IProductService _iProductService;
         public CartController(DatabaseContext context)
         {
             _context = context;
             _iCartService = new CartService(_context);
-            _iProductService = new ProductService(_context);
         }
         public IActionResult Index()
         {
@@ -34,29 +33,33 @@ namespace Asm_Csharp4.Controllers
                 return View();
             }
         }
-        [NonAction]
-        public int IsExist(string name)
+        public IActionResult Buy(string name, decimal price)
         {
-            try
+            Carts carts;
+            if (_iCartService.GetListCart().Count == 0)
             {
-                var cart = _iCartService.GetListCart();
-                for (var i = 0; i < cart.Count; i++)
+                carts = new Carts { ProductName = name, Price = price, Quantity = 1 };
+                _iCartService.AddCart(carts);
+            }
+            else
+            {
+                var soLuong = _iCartService.GetCurrentQuantity(name);
+                var exist = _iCartService.FindExistProduct(name);
+                if (exist)
                 {
-                    if (_iCartService.FindExistProduct(name))
-                    {
-                        return i;
-                    }
+                    carts = new Carts { ProductName = name, Price = price, Quantity = soLuong };
+                    carts.Quantity++;
+                    _iCartService.UpdateQuantity(carts);
                 }
-
-                return -1;
+                else
+                {
+                    carts = new Carts() { ProductName = name, Price = price, Quantity = 1 };
+                    _iCartService.AddCart(carts);
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return -1;
-            }
+            return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id)
+        public IActionResult Remove(int id)
         {
             try
             {
@@ -69,38 +72,32 @@ namespace Asm_Csharp4.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (DbUpdateException e)
             {
+                Console.WriteLine(e.Message);
                 return RedirectToAction(nameof(Index));
-                ;
+                
             }
         }
-        public IActionResult Buy(string name,decimal price,Cart carts)
+
+        public IActionResult Checkout()
         {
-            if (_iCartService.GetListCart().Count == 0)
-            {
-                carts = new Cart {ProductName = name, Price = price, Quantity = 1};
-                _iCartService.AddCart(carts);
-            }
-            else
-            {
-                var soLuong = _iCartService.GetCurrentQuantity(name);
-                int index = IsExist(name);
-                if (index != -1)
-                {
-                    carts = new Cart {ProductName = name, Price = price, Quantity = soLuong};
-                    carts.Quantity++;
-                _iCartService.UpdateQuantity(carts);
-                }
-                else
-                {
-                    carts = new Cart {ProductName = name, Price = price, Quantity = 1};
-                    _iCartService.AddCart(carts);
-                }
-            }
-            return RedirectToAction("Index");
+            var cart = _iCartService.GetListCart();
+            ViewBag.total = cart.Sum(c => c.Price * c.Quantity);
+            return View();
         }
 
+        public async Task<IActionResult> ConfirmCheckout()
+        {
+            var carts = _iCartService.GetListCart();
+            foreach (var item in carts)
+            {
+                _context.Carts.Remove(item);
+            }
 
+            ViewData["Checkout"] = "<script>alert('Thanh toán thành công')</script>";
+            await  _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

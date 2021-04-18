@@ -19,11 +19,10 @@ namespace Asm_Csharp4.Models
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
-        [Required]
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
+        [Display(Name = "Mô tả")]
         [StringLength(200)]
-        [Display(Name = "Mô tả sản phẩm")]
         public string Description { get; set; }
         [Display(Name = "Đơn giá")]
         [Column(TypeName = "money")]
@@ -33,10 +32,11 @@ namespace Asm_Csharp4.Models
         public string Image { get; set; }
         [Display(Name = "Danh mục")]
         public int? CategoryId { get; set; }
+
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty(nameof(Categories.Products))]
         public virtual Categories Category { get; set; }
-        [InverseProperty("MaSpNavigation")]
+        [InverseProperty("IdProductNavigation")]
         public virtual ICollection<CartDetails> CartDetails { get; set; }
     }
 }

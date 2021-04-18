@@ -119,6 +119,7 @@ namespace Asm_Csharp4.Controllers
                         _iCategoryService.Delete(id);
                     }
                 }
+                Console.WriteLine(_iCategoryService.Delete(id));
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException e)

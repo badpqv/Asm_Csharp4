@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cart>
+﻿@model IEnumerable<Carts>
 @{
     ViewData["Title"] = "Cart";
 }
@@ -21,7 +21,7 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Remove</a>
+                        <a asp-action="Remove" class="btn btn-outline-danger" asp-route-id="@item.Id">Remove</a>
                     </td>
                     <td>@Html.DisplayFor(model => item.ProductName)</td>
                     <td>@Html.DisplayFor(model => item.Price)</td>
@@ -30,7 +30,7 @@
                 </tr>
             }
         }
-        <tr class="text-right">
+        <tr class="text-end">
             <td colspan="4">Tổng tiền</td>
             <td>@ViewBag.total</td>
         </tr>
@@ -39,7 +39,7 @@
 <hr/>
 <div class="row">
     <div class="col-sm-2">
-        <a class="btn btn-primary" asp-action="Index">Thanh toán</a>
+        <a class="btn btn-primary" asp-action="Checkout">Thanh toán</a>
     </div>
     <div class="col-sm-2">
         <a class="nav-link" asp-controller="Home" asp-action="Index">Tiếp tục mua sắm</a>

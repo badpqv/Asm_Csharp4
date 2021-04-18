@@ -9,12 +9,17 @@ namespace Asm_Csharp4.IServices
 {
     interface ICartService
     {
-        List<Cart> GetListCart();
-        int? GetCurrentQuantity(string name);
-        void AddCart(Cart cart);
-        void UpdateQuantity(Cart cart);
-        bool FindExistProduct(string name);
-        int Delete(int id);
+        //Lấy danh sách hoá đơn
+        List<Carts> GetListCart();
+        //Kiểm tra IdCart để thực hiện xoá
         bool CheckCartId(int id);
+        //Kiểm tra sản phẩm có tồn tại trong giỏ hàng ko?
+        bool FindExistProduct(string name);
+        //Lấy số lượng sản phẩm hiện tại
+        int? GetCurrentQuantity(string name);
+        //Chức năng
+        void AddCart(Carts cart);
+        void UpdateQuantity(Carts cart);
+        string Delete(int id);
     }
 }

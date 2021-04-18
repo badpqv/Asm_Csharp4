@@ -18,8 +18,8 @@ namespace Asm_Csharp4.Models
 
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Tên danh mục")]
         [StringLength(10)]
+        [Display(Name = "Tên danh mục")]
         public string Name { get; set; }
 
         [InverseProperty("Category")]

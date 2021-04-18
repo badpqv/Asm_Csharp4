@@ -9,26 +9,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Asm_Csharp4.Models
 {
-    public partial class Cart
+    public partial class Carts
     {
-        public Cart()
+        public Carts()
         {
             CartDetails = new HashSet<CartDetails>();
         }
 
         [Key]
         public int Id { get; set; }
-        [StringLength(200)]
         [Display(Name = "Tên sản phẩm")]
+        [StringLength(200)]
         public string ProductName { get; set; }
-        [Display(Name = "Đơn giá")]
-        [Column(TypeName = "decimal(18, 0)")]
+        [Display(Name = "Đơn giá ")]
+        [Column(TypeName = "money")]
         public decimal? Price { get; set; }
+        [Display(Name = "Số lượng")]
+        public int? Quantity { get; set; }
 
-        [Display(Name = "Số lượng")] 
-        public int? Quantity { get; set; } = 0;
-
-        [InverseProperty("MaCartNavigation")]
+        [InverseProperty("IdCartNavigation")]
         public virtual ICollection<CartDetails> CartDetails { get; set; }
     }
 }

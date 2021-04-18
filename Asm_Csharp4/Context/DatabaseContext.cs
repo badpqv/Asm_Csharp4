@@ -20,8 +20,8 @@ namespace Asm_Csharp4.Context
         {
         }
 
-        public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<CartDetails> CartDetails { get; set; }
+        public virtual DbSet<Carts> Carts { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Products> Products { get; set; }
@@ -30,7 +30,7 @@ namespace Asm_Csharp4.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=AssignmentC4;Integrated Security=True");
             }
         }
@@ -39,18 +39,17 @@ namespace Asm_Csharp4.Context
         {
             modelBuilder.Entity<CartDetails>(entity =>
             {
-                entity.HasKey(e => new { e.MaSp, e.MaCart })
-                    .HasName("PK_cartdetails");
+                entity.HasKey(e => new { e.IdCart, e.IdProduct })
+                    .HasName("PK_CartDetails");
 
-                entity.HasOne(d => d.MaCartNavigation)
+                entity.HasOne(d => d.IdCartNavigation)
                     .WithMany(p => p.CartDetails)
-                    .HasForeignKey(d => d.MaCart)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.IdCart)
                     .HasConstraintName("FK_Cartdetails_Cart");
 
-                entity.HasOne(d => d.MaSpNavigation)
+                entity.HasOne(d => d.IdProductNavigation)
                     .WithMany(p => p.CartDetails)
-                    .HasForeignKey(d => d.MaSp)
+                    .HasForeignKey(d => d.IdProduct)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cartdetails_Products");
             });

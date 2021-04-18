@@ -13,15 +13,15 @@ namespace Asm_Csharp4.Models
     public partial class CartDetails
     {
         [Key]
-        public int MaSp { get; set; }
+        public int IdCart { get; set; }
         [Key]
-        public int MaCart { get; set; }
+        public int IdProduct { get; set; }
 
-        [ForeignKey(nameof(MaCart))]
-        [InverseProperty(nameof(Cart.CartDetails))]
-        public virtual Cart MaCartNavigation { get; set; }
-        [ForeignKey(nameof(MaSp))]
+        [ForeignKey(nameof(IdCart))]
+        [InverseProperty(nameof(Carts.CartDetails))]
+        public virtual Carts IdCartNavigation { get; set; }
+        [ForeignKey(nameof(IdProduct))]
         [InverseProperty(nameof(Products.CartDetails))]
-        public virtual Products MaSpNavigation { get; set; }
+        public virtual Products IdProductNavigation { get; set; }
     }
 }

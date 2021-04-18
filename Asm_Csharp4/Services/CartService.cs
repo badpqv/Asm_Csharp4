@@ -6,68 +6,68 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asm_Csharp4.Services
 {
     public class CartService : ICartService
     {
         private readonly DatabaseContext _context;
-        private List<Cart> _lstCarts;
+        private List<Carts> _lstCarts;
+        CartDetails detail;
         public CartService(DatabaseContext context)
         {
+            detail = new CartDetails();
             _context = context;
-            _lstCarts = new List<Cart>();
+            _lstCarts = new List<Carts>();
             GetListCart();
         }
-
-        public List<Cart> GetListCart()
+        public List<Carts> GetListCart()
         {
-            _lstCarts = _context.Cart.ToList();
+            _lstCarts = _context.Carts.ToList();
             return _lstCarts;
         }
-
         public bool FindExistProduct(string name)
         {
-            return  _context.Cart.Any(c => c.ProductName.Equals(name));
+            return  _context.Carts.Any(c => c.ProductName.Equals(name));
         }
-
-        public void AddCart(Cart cart)
+        public  void AddCart(Carts cart)
         {
-            _context.Cart.Add(cart);
-            _context.SaveChangesAsync();
-        }
-
-        public void UpdateQuantity(Cart carts)
-        {
-            var cart = _context.Cart.FirstOrDefault(c=>c.ProductName == carts.ProductName);
-            cart.Quantity = carts.Quantity;
-            _context.Cart.Update(cart);
+            var idProduct = _context.Products.FirstOrDefault(c => c.Name == cart.ProductName).Id;
+            var details = new CartDetails() {IdCart = cart.Id, IdProduct = idProduct, IdCartNavigation = cart};
+            _context.CartDetails.Add(details);
             _context.SaveChanges();
-            
         }
-
+        public void UpdateQuantity(Carts carts)
+        {
+            var cart = _context.Carts.FirstOrDefault(c=>c.ProductName == carts.ProductName);
+            cart.Quantity = carts.Quantity;
+            _context.Carts.Update(cart);
+            _context.SaveChanges();
+        }
         public int? GetCurrentQuantity(string name)
         {
-            var cart = _context.Cart.Where(c => c.ProductName == name).Select(c => c.Quantity).FirstOrDefault();
+            var cart = _context.Carts.Where(c => c.ProductName == name).Select(c => c.Quantity).FirstOrDefault();
             return cart;
         }
 
         public bool CheckCartId(int id)
         {
-            return _context.Cart.Any(c => c.Id == id);
+            return _context.Carts.Any(c => c.Id == id);
         }
 
-        public int Delete(int id)
+        public string Delete(int id)
         {
-            var cart = _context.Cart.FirstOrDefault(c => c.Id == id);
-            if (cart != null)
+                var cart = _context.Carts.FirstOrDefault(c => c.Id == id);
+                var details = _context.CartDetails.FirstOrDefault(c=>c.IdCart == cart.Id);
+            if (details != null)
             {
-                _context.Cart.Remove(cart);
+                _context.CartDetails.Remove(details);
                 _context.SaveChanges();
-                return 0;
+                return "Xoá thành công";
             }
 
-            return -1;
+            return "Xoá thất bại";
         }
     }
 }

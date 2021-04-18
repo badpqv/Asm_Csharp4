@@ -21,22 +21,33 @@ namespace Asm_Csharp4.Controllers
             _context = context;
             _iProductService = new ProductService(_context);
         }
-        //Index có tìm kiếm theo tên
-        public IActionResult Index(string name)
+
+        public IActionResult Index()
         {
             ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
             try
             {
+                var lstProducts = _iProductService.GetListProduct();
+                return View(lstProducts);
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+        }
+        [HttpPost,ActionName("Index")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Search(string name)
+        {
+            try
+            {
                 if (!String.IsNullOrEmpty(name))
                 {
-                    var lstProducts = _iProductService.GetListProduct().Where(c => c.Name == name).ToList();
+                    
+                    var lstProducts = _iProductService.GetListProduct().Where(c => c.Name.Contains(name)).ToList();
                     return View(lstProducts);
                 }
-                else
-                {
-                    var lstProducts = _iProductService.GetListProduct();
-                    return View(lstProducts);
-                }
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {
@@ -56,7 +67,7 @@ namespace Asm_Csharp4.Controllers
             }
             return View(product);
         }
-       
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -67,7 +78,7 @@ namespace Asm_Csharp4.Controllers
 
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name", "Description", "Price", "Image","CategoryId")] Products product)
+        public IActionResult Create([Bind("Name", "Description", "Price", "Image", "CategoryId")] Products product)
         {
             try
             {
@@ -91,13 +102,13 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewData["DanhMuc"]= new SelectList(_context.Categories, "Id", "Name");
-            
+            ViewData["DanhMuc"] = new SelectList(_context.Categories, "Id", "Name");
+
             var product = _iProductService.GetProductsObj(id);
             return View(product);
         }
 
-        [HttpPost,ActionName("Edit")]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public IActionResult EditProduct(Products product)
         {

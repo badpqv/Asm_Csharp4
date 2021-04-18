@@ -13,18 +13,17 @@ namespace Asm_Csharp4.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Họ tên người dùng")]
         [StringLength(50)]
-        [Display(Name = "Họ tên khách hàng")]
         public string FullName { get; set; }
-        [StringLength(100)]
         [Display(Name = "Tên tài khoản")]
-        public string TaiKhoan { get; set; }
         [StringLength(100)]
+        public string TaiKhoan { get; set; }
         [Display(Name = "Mật khẩu")]
-        [DataType(DataType.Password)]
+        [StringLength(100)]
         public string MatKhau { get; set; }
-        [StringLength(20)]
         [Display(Name = "Quyền")]
+        [StringLength(20)]
         public string Quyen { get; set; }
     }
 }
