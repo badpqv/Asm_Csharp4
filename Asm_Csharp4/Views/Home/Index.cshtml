@@ -10,9 +10,9 @@
             <div class="col">
                 <div class="card text-truncate border-success  h-100">
                     <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top h-50" alt="Product Image" />
-                    <div class="card-body">
-                        <h5 class="card-title text-transition">@Html.DisplayFor(model => item.Name)</h5>
-                        <h6 class="card-subtitle mb-5 text-danger text-transition"
+                    <div class="card-body justify-content-center h-25">
+                        <h5 class="card-title">@Html.DisplayFor(model => item.Name)</h5>
+                        <h6 class="card-subtitle mb-5 text-danger"
                             title="@Html.DisplayFor(model => item.Description)">
                             @Html.DisplayFor(model => item.Description)
                         </h6>

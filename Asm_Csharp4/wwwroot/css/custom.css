@@ -48,21 +48,3 @@ button.accept-policy {
     font-size: 1rem;
     line-height: inherit;
 }
-/*Sticky footer*/
-html {
-    position: relative;
-    min-height: 100vh
-
-}
-body {
-    min-height: 100vh;
-}
-footer {
-    position: absolute;
-    line-height: 50px;
-    margin: 0 auto;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-}

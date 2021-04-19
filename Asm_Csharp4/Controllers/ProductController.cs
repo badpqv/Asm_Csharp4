@@ -35,8 +35,8 @@ namespace Asm_Csharp4.Controllers
                 return View();
             }
         }
-        [HttpGet]
-        public IActionResult Index(string name, int categoryId)
+        [HttpGet, ActionName(nameof(Index))]
+        public IActionResult Search(string name, int categoryId)
         {
             ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
             var products = _iProductService.GetListProduct();
@@ -44,10 +44,10 @@ namespace Asm_Csharp4.Controllers
             {
                 name = "";
             }
-            if (!String.IsNullOrEmpty(name) || categoryId != 0)
-            {
-                products = products.Where(c => c.Name.Contains(name) && c.CategoryId == categoryId).ToList();
-            }
+            products = categoryId != 0 ? products.Where(c => c.Name.Contains(name) && c.CategoryId == categoryId).ToList() : products.Where(c => c.Name.Contains(name)).ToList();
+
+
+
             return View(products);
         }
         [HttpGet]
