@@ -54,7 +54,7 @@ namespace Asm_Csharp4.Services
             var ctg = _context.Categories.Find(category.Id);
             ctg.Name = category.Name;
             _context.Categories.Update(ctg);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public int Delete(int categoryId)

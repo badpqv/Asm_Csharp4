@@ -21,6 +21,7 @@ namespace Asm_Csharp4.Models
         public string TaiKhoan { get; set; }
         [Display(Name = "Mật khẩu")]
         [StringLength(100)]
+        [DataType(DataType.Password)]
         public string MatKhau { get; set; }
         [Display(Name = "Quyền")]
         [StringLength(20)]

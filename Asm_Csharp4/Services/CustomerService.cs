@@ -40,7 +40,7 @@ namespace Asm_Csharp4.Services
         public void Save(Customers customer)
         {
             _context.Customers.Add(customer);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Update(Customers customer)

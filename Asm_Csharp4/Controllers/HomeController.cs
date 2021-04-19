@@ -30,7 +30,19 @@ namespace Asm_Csharp4.Controllers
             var lstProduct = _iProductService.GetListProduct();
             return View(lstProduct);
         }
-     
+        [HttpGet, ActionName(nameof(Index))]
+        public IActionResult Search(string name, int categoryId)
+        {
+            ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
+            var products = _iProductService.GetListProduct();
+            if (name == null)
+            {
+                name = "";
+            }
+            products = categoryId != 0 ? products.Where(c => c.Name.Contains(name) && c.CategoryId == categoryId).ToList() : products.Where(c => c.Name.Contains(name)).ToList();
+
+            return View(products);
+        }
         [HttpGet]
         public IActionResult Details(int id)
         {

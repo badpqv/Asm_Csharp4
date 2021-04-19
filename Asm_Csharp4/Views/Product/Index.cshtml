@@ -12,12 +12,12 @@
     <label>Tìm kiếm sản phẩm: </label>
     <div class="row g-3">
         <div class="col-sm-3">
-                <input type="text" name="name" class="form-control" placeholder="Tìm sản phẩm theo tên ..."/>
+            <input type="text" name="name" class="form-control" placeholder="Tìm sản phẩm theo tên ..."/>
         </div>
-        <div class="col-sm-2">
-                <select asp-items="@ViewBag.DanhMuc" name="categoryId" class="form-select">
-                    <option value="0">...</option>
-                </select>
+        <div class="col-sm-3">
+            <select asp-items="@ViewBag.DanhMuc" name="categoryId" class="form-select">
+                <option value="0">Tất cả danh mục</option>
+            </select>
         </div>
     </div>
     <br/>

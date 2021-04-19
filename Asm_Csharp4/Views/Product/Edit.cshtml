@@ -28,7 +28,7 @@
                         <input asp-for="Image" class="form-control"/>
                 </div>
                 <div class="col-sm-8">
-                        <label asp-for="CategoryId"></label>
+                    <label asp-for="CategoryId"></label>
                     <select asp-for="CategoryId" asp-items="@ViewBag.DanhMuc" class="form-select" required>
                         <option value="">-Chọn danh mục-</option>
                     </select>
@@ -36,12 +36,11 @@
                         Chọn 1 danh mục
                     </span>
                 </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-sm-4">
-                    <input type="submit" value="Cập nhật" class="btn btn-primary"/><br/>
-                    <a asp-action="Index">Back to list  </a>
+                <div class="col-12">
+                        <input type="submit" value="Cập nhật" class="btn btn-primary"/><br/>
+                        <a asp-action="Index">Back to list  </a>
                 </div>
             </div>
+            <br/>
+  
         </form>
