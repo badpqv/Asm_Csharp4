@@ -7,6 +7,7 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Asm_Csharp4.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace Asm_Csharp4.Controllers
         private IProductService _iProductService;
         public ProductController(DatabaseContext context)
         {
+            
             _context = context;
             _iProductService = new ProductService(_context);
         }
@@ -53,6 +55,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
+             
             var lstDanhMuc = new SelectList(_context.Categories, "Id", "Name");
             ViewData["DanhMuc"] = lstDanhMuc;
             var product = _iProductService.GetById(id);
@@ -66,6 +69,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+             
             var lstDanhMuc = new SelectList(_context.Categories, "Id", "Name");
             ViewData["DanhMuc"] = lstDanhMuc;
             return View();
@@ -74,6 +78,7 @@ namespace Asm_Csharp4.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateProduct([Bind("Name", "Description", "Price", "Image", "CategoryId")] Products product)
         {
+             
             try
             {
                 if (ModelState.IsValid)
@@ -95,6 +100,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+             
             ViewData["DanhMuc"] = new SelectList(_context.Categories, "Id", "Name");
 
             var product = _iProductService.GetProductsObj(id);
@@ -124,6 +130,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+             
             var product = _iProductService.GetProductsObj(id);
             return View(product);
         }

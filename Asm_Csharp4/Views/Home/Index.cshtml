@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to Azs Shop";
 }
 @model IEnumerable<Products>
-<h1 class="display-4 text-uppercase text-danger text-center">Welcome</h1>
+<h1 class="display-4 text-uppercase text-center text-muted">Azs Shop</h1>
 <form asp-action="Index" autocomplete="off" method="get">
     <label>Tìm kiếm sản phẩm: </label>
     <div class="row g-3">
@@ -20,15 +20,16 @@
     </div>
 </form>
 <hr />
+<h6 class="text-center">@ViewBag.Found</h6>
 <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center py-5">
     @{
         foreach (var item in Model)
         {
             <div class="col">
                 <div class="card  border-success h-100 text-truncate">
-                    <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top" width="100%" height="180" alt="Product Image" />
+                    <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top" width="100%" height="200" alt="Product Image"/>
                     <div class="card-body text-center">
-                        <h5 class="card-title text-transition" title="@Html.DisplayFor(model=>item.Name)">@Html.DisplayFor(model => item.Name)</h5>
+                        <h5 class="card-title text-transition" title="@Html.DisplayFor(model => item.Name)">@Html.DisplayFor(model => item.Name)</h5>
                         <h6 class="card-subtitle mb-5 text-danger text-transition"
                             title="@Html.DisplayFor(model => item.Description)">
                             @Html.DisplayFor(model => item.Description)

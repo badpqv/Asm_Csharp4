@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Index - QLSP";
+    ViewData["Icon"] = "/icons/bag.svg";
 }
 @using System.Linq
 @using Microsoft.EntityFrameworkCore.Metadata
@@ -26,8 +27,8 @@
 <br />
 <hr />
 <div class="table table-responsive">
-    <table class="table table-bordered table-striped text-wrap align-middle text-center border-warning table-sm">
-        <thead class="table-warning">
+    <table class="table table-bordered text-wrap align-middle text-center table-sm">
+        <thead class="table-primary">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Name)</th>
                 <th>@Html.DisplayNameFor(model => model.Description)</th>

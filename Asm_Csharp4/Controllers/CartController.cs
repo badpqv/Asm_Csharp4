@@ -7,6 +7,7 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Asm_Csharp4.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Asm_Csharp4.Controllers
@@ -15,6 +16,7 @@ namespace Asm_Csharp4.Controllers
     {
         private readonly DatabaseContext _context;
         private ICartService _iCartService;
+        
         public CartController(DatabaseContext context)
         {
             _context = context;
@@ -22,9 +24,11 @@ namespace Asm_Csharp4.Controllers
         }
         public IActionResult Index()
         {
+            var userName = HttpContext.Session.GetString("Username");
+             
             try
             {
-                var cart = _iCartService.GetListCart();
+                var cart = _iCartService.GetListCart(userName);
                 ViewBag.total = cart.Sum(c => c.Price * c.Quantity);
                 return View(cart);
             }
@@ -36,24 +40,26 @@ namespace Asm_Csharp4.Controllers
         public IActionResult Buy(string name, decimal price)
         {
             Carts carts;
-            if (_iCartService.GetListCart().Count == 0)
+            var userName = HttpContext.Session.GetString("Username");
+            var idCust = _context.Customers.FirstOrDefault(c => c.Username == userName).Id;
+            if (_iCartService.GetListCart(userName).Count == 0)
             {
-                carts = new Carts { ProductName = name, Price = price, Quantity = 1 };
+                carts = new Carts { ProductName = name, Price = price, Quantity = 1,IdCustomer = idCust};
                 _iCartService.AddCart(carts);
             }
             else
             {
-                var soLuong = _iCartService.GetCurrentQuantity(name);
+                var soLuong = _iCartService.GetCurrentQuantity(name,userName);
                 var exist = _iCartService.FindExistProduct(name);
                 if (exist)
                 {
-                    carts = new Carts { ProductName = name, Price = price, Quantity = soLuong };
+                    carts = new Carts { ProductName = name, Price = price, Quantity = soLuong,IdCustomer = idCust};
                     carts.Quantity++;
                     _iCartService.UpdateQuantity(carts);
                 }
                 else
                 {
-                    carts = new Carts() { ProductName = name, Price = price, Quantity = 1 };
+                    carts = new Carts() { ProductName = name, Price = price, Quantity = 1,IdCustomer = idCust};
                     _iCartService.AddCart(carts);
                 }
             }
@@ -70,10 +76,12 @@ namespace Asm_Csharp4.Controllers
                         _iCartService.Delete(id);
                     }
                 }
+                 
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException e)
             {
+                 
                 Console.WriteLine(e.Message);
                 return RedirectToAction(nameof(Index));
                 
@@ -82,14 +90,17 @@ namespace Asm_Csharp4.Controllers
 
         public IActionResult Checkout()
         {
-            var cart = _iCartService.GetListCart();
+            var userName = HttpContext.Session.GetString("Username");
+             
+            var cart = _iCartService.GetListCart(userName);
             ViewBag.total = cart.Sum(c => c.Price * c.Quantity);
             return View();
         }
 
         public async Task<IActionResult> ConfirmCheckout()
         {
-            var carts = _iCartService.GetListCart();
+            var userName = HttpContext.Session.GetString("Username");
+            var carts = _iCartService.GetListCart(userName);
             foreach (var item in carts)
             {
                 _context.Carts.Remove(item);

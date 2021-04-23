@@ -1,12 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Index - QL Danh mục";
+    ViewData["Icon"] = "/icons/list-ol.svg";
 }
 @model IEnumerable<Categories>
 <h1 class="display-4 text-center text-danger">Quản lý danh mục</h1>
 <a asp-action="Create" class="btn btn-outline-info">Thêm danh mục mới</a>
 <hr />
 <span>@Html.Raw(@ViewData["Error"])</span>
-<table class="table table-bordered table-striped align-middle text-wrap table-light border-danger">
+<table class="table table-bordered  align-middle text-wrap  border-danger">
     <thead class="table-danger">
         <tr class="text-center">
             <th>@Html.DisplayNameFor(model => model.Name)</th>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Asm_Csharp4.Services
 {
@@ -16,6 +17,7 @@ namespace Asm_Csharp4.Services
         {
             _context = context;
             lstCustomer = new List<Customers>();
+            GetListCustomers();
         }
         public List<Customers> GetListCustomers()
         {
@@ -47,8 +49,12 @@ namespace Asm_Csharp4.Services
         {
             var cst = _context.Customers.Find(customer.Id);
             cst.FullName = customer.FullName;
-            cst.TaiKhoan = customer.TaiKhoan;
-            cst.MatKhau = customer.MatKhau;
+            cst.Email = customer.Email;
+            cst.Address = customer.Address;
+            cst.SDT = customer.SDT;
+            cst.CmndCccd = customer.CmndCccd;
+            cst.Username = customer.Username;
+            cst.Password = customer.Password;
             cst.Quyen = customer.Quyen;
             _context.Customers.Update(cst);
             _context.SaveChanges();

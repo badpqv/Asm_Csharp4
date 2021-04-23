@@ -1,21 +1,23 @@
 ﻿@model IEnumerable<Carts>
 @{
     ViewData["Title"] = "Cart";
+    ViewData["Icon"] = "/icons/cart4.svg";
 }
-<h1 class="text-center text-danger">Cart Index</h1>
+<h1 class="text-center text-danger">Giỏ hàng</h1>
 <br />
 <hr />
-<table class="table table-bordered align-middle text-center">
-    <thead>
-    <tr>
-        <th>Actions</th>
-        <th>@Html.DisplayNameFor(model => model.ProductName)</th>
-        <th>@Html.DisplayNameFor(model => model.Price)</th>
-        <th>@Html.DisplayNameFor(model => model.Quantity)</th>
-        <th>Thành tiền</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <table class="table table-bordered align-middle text-center">
+        <thead>
+        <tr>
+            <th>Actions</th>
+            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>Thành tiền</th>
+        </tr>
+        </thead>
+        <tbody>
         @{
             foreach (var item in Model)
             {
@@ -34,14 +36,15 @@
             <td colspan="4">Tổng tiền</td>
             <td>@ViewBag.total</td>
         </tr>
-    </tbody>
-</table>
-<hr/>
-<div class="row">
-    <div class="col-sm-2">
-        <a class="btn btn-primary" asp-action="Checkout">Thanh toán</a>
-    </div>
-    <div class="col-sm-2">
-        <a class="nav-link" asp-controller="Home" asp-action="Index">Tiếp tục mua sắm</a>
+        </tbody>
+    </table>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-2">
+            <a class="btn btn-primary" asp-action="Checkout">Thanh toán</a>
+        </div>
+        <div class="col-sm-2">
+            <a class="nav-link" asp-controller="Home" asp-action="Index">Tiếp tục mua sắm</a>
+        </div>
     </div>
 </div>

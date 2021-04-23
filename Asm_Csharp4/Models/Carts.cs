@@ -18,15 +18,19 @@ namespace Asm_Csharp4.Models
 
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Tên sản phẩm")]
         [StringLength(200)]
+        [Display(Name = "Tên sản phẩm")]
         public string ProductName { get; set; }
-        [Display(Name = "Đơn giá ")]
         [Column(TypeName = "money")]
+        [Display(Name = "Đơn giá")]
         public decimal? Price { get; set; }
         [Display(Name = "Số lượng")]
         public int? Quantity { get; set; }
+        public int? IdCustomer { get; set; }
 
+        [ForeignKey(nameof(IdCustomer))]
+        [InverseProperty(nameof(Customers.Carts))]
+        public virtual Customers IdCustomerNavigation { get; set; }
         [InverseProperty("IdCartNavigation")]
         public virtual ICollection<CartDetails> CartDetails { get; set; }
     }

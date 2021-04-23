@@ -8,6 +8,7 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Asm_Csharp4.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Asm_Csharp4.Controllers
@@ -19,11 +20,13 @@ namespace Asm_Csharp4.Controllers
 
         public CategoryController(DatabaseContext context)
         {
+       
             _context = context;
             _iCategoryService = new CategoryService(_context);
         }
         public IActionResult Index()
         {
+             
             try
             {
                 var lstCategories = _iCategoryService.GetListCategories();
@@ -38,6 +41,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
+             
             var category = _iCategoryService.GetById(id);
             if (category == null)
             {
@@ -48,6 +52,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+             
             return View();
         }
 
@@ -55,6 +60,7 @@ namespace Asm_Csharp4.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name")] Categories category)
         {
+
             try
             {
                 if (ModelState.IsValid)
@@ -69,6 +75,7 @@ namespace Asm_Csharp4.Controllers
             }
             catch (Exception e)
             {
+
                 Console.WriteLine(e);
                 return View(category);
             }
@@ -76,6 +83,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+             
             var category = _iCategoryService.GetById(id);
             return View(category);
         }
@@ -102,6 +110,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+             
             var category = _iCategoryService.GetCategoryObj(id);
             return View(category);
         }

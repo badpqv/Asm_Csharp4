@@ -47,11 +47,25 @@ namespace Asm_Csharp4.Context
                     .HasForeignKey(d => d.IdCart)
                     .HasConstraintName("FK_Cartdetails_Cart");
 
+                entity.HasOne(d => d.IdCustomerNavigation)
+                    .WithMany(p => p.CartDetails)
+                    .HasForeignKey(d => d.IdCustomer)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Cart_details_Customers");
+
                 entity.HasOne(d => d.IdProductNavigation)
                     .WithMany(p => p.CartDetails)
                     .HasForeignKey(d => d.IdProduct)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cartdetails_Products");
+            });
+
+            modelBuilder.Entity<Carts>(entity =>
+            {
+                entity.HasOne(d => d.IdCustomerNavigation)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.IdCustomer)
+                    .HasConstraintName("FK_Carts_Customer");
             });
 
             modelBuilder.Entity<Products>(entity =>

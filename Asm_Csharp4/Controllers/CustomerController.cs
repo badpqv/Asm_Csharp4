@@ -7,6 +7,7 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Models;
 using Asm_Csharp4.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace Asm_Csharp4.Controllers
 {
@@ -22,6 +23,7 @@ namespace Asm_Csharp4.Controllers
         }
         public IActionResult Index()
         {
+             
             try
             {
                 var lstCustomers = _iCustomerService.GetListCustomers();
@@ -35,6 +37,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
+             
             var customer = _iCustomerService.GetById(id);
             if (customer == null)
             {
@@ -45,12 +48,13 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+             
             return View();
         }
 
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FullName", "TaiKhoan", "MatKhau","Quyen")] Customers customer)
+        public IActionResult Create([Bind("FullName","Email","SDT","CmndCCCD","Address","Username","Password","Quyen")] Customers customer)
         {
             try
             {
@@ -72,6 +76,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+             
             var customer = _iCustomerService.GetCustomerObj(id);
             return View(customer);
         }
@@ -97,6 +102,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+             
             var customer = _iCustomerService.GetCustomerObj(id);
             return View(customer);
         }
