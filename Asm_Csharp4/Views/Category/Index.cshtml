@@ -7,27 +7,30 @@
 <a asp-action="Create" class="btn btn-outline-info">Thêm danh mục mới</a>
 <hr />
 <span>@Html.Raw(@ViewData["Error"])</span>
-<table class="table table-bordered  align-middle text-wrap  border-danger">
-    <thead class="table-danger">
+<div class="container">
+    <table class="table table-bordered  align-middle text-wrap table-responsive-sm">
+        <thead class="table-danger">
         <tr class="text-center">
             <th>@Html.DisplayNameFor(model => model.Name)</th>
             <th>Actions</th>
         </tr>
-    </thead>
-    <tbody >
+        </thead>
+        <tbody >
         @{
             foreach (var item in Model)
             {
                 <tr class="text-center fw-bolder align-middle">
                     <td class="text-info">@Html.DisplayFor(model => item.Name)</td>
-
                     <td>
-                        <a asp-action="Details" class="btn btn-outline-info btn-sm" asp-route-id="@item.Id">Details</a>
-                        <a asp-action="Edit" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Sửa TT danh mục</a>
-                        <a asp-action="Delete" class="btn btn-outline-danger btn-sm" asp-route-id="@item.Id">Xoá danh mục</a>
+                        <div class="btn-group btn-group-sm">
+                            <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Id">Details</a>
+                            <a asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">Sửa TT danh mục</a>
+                            <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Xoá danh mục</a>
+                        </div>
                     </td>
                 </tr>
             }
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

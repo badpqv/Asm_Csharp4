@@ -49,8 +49,6 @@ namespace Asm_Csharp4.Services
         public Products GetProductsObj(int idProduct)
         {
             var data = lstProducts.FirstOrDefault(c => c.Id == idProduct);
-            Console.WriteLine("Id: "+idProduct);
-            Console.WriteLine("Data Id: " + data.Id.ToString());
             return data ;
         }
 

@@ -30,8 +30,8 @@ namespace Asm_Csharp4.Models
         [StringLength(100)]
         [Display(Name = "Hình ảnh")]
         public string Image { get; set; }
-        public int? CategoryId { get; set; }
         [Display(Name = "Danh mục")]
+        public int? CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty(nameof(Categories.Products))]
         public virtual Categories Category { get; set; }

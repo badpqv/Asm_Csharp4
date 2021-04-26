@@ -9,36 +9,36 @@
 <div class="container">
     <table class="table table-bordered align-middle text-center">
         <thead>
-        <tr>
-            <th>Actions</th>
-            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
-            <th>@Html.DisplayNameFor(model => model.Price)</th>
-            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
-            <th>Thành tiền</th>
-        </tr>
+            <tr>
+                <th>Actions</th>
+                <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+                <th>Thành tiền</th>
+            </tr>
         </thead>
         <tbody>
-        @{
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Remove" class="btn btn-outline-danger" asp-route-id="@item.Id">Remove</a>
-                    </td>
-                    <td>@Html.DisplayFor(model => item.ProductName)</td>
-                    <td>@Html.DisplayFor(model => item.Price)</td>
-                    <td>@Html.DisplayFor(model => item.Quantity)</td>
-                    <td>@(item.Price * item.Quantity)</td>
-                </tr>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Remove" class="btn btn-outline-danger" asp-route-id="@item.Id">Remove</a>
+                        </td>
+                        <td>@Html.DisplayFor(model => item.ProductName)</td>
+                        <td>@Html.DisplayFor(model => item.Price)</td>
+                        <td>@Html.DisplayFor(model => item.Quantity)</td>
+                        <td>@(item.Price * item.Quantity)</td>
+                    </tr>
+                }
             }
-        }
-        <tr class="text-end">
-            <td colspan="4">Tổng tiền</td>
-            <td>@ViewBag.total</td>
-        </tr>
+            <tr class="text-end">
+                <td colspan="4">Tổng tiền</td>
+                <td>@ViewBag.total</td>
+            </tr>
         </tbody>
     </table>
-    <hr/>
+    <hr />
     <div class="row">
         <div class="col-sm-2">
             <a class="btn btn-primary" asp-action="Checkout">Thanh toán</a>

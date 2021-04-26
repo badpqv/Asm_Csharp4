@@ -1,47 +1,88 @@
 ﻿@{
-    ViewData["Title"] = "Welcome to Azs Shop";
+    ViewData["Title"] = "Haxxor Bunny";
 }
 @model IEnumerable<Products>
-<h1 class="display-4 text-uppercase text-center text-muted">Azs Shop</h1>
-<form asp-action="Index" autocomplete="off" method="get">
-    <label>Tìm kiếm sản phẩm: </label>
-    <div class="row g-3">
-        <div class="col-sm-3">
-            <input type="text" name="name" class="form-control" placeholder="Tìm sản phẩm theo tên ..." />
+<div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouseIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container-fluid">
+                <img src="~/images/haxxor.jpg" class="d-block" alt="..." width="100%" height="400" />
+                <div class="carousel-caption">
+                    <h5 class="text-stroke">Welcome to HB's shop</h5>
+                    <p class="text-stroke">Low gaming experience? We can help you ^_^</p>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-3">
-            <select asp-items="@ViewBag.DanhMuc" name="categoryId" class="form-select">
-                <option value="0">Tất cả danh mục</option>
-            </select>
-        </div>
-        <div class="col-12">
-            <input type="submit" value="Search" class="btn btn-info" />
+        <div class="carousel-item">
+            <div class="container-fluid">
+                <img src="~/images/haxxorbunny.jpg" class="d-block" alt="..." width="100%" height="400" />
+                <div class="carousel-caption">
+                    <h5 class="text-stroke">Low Price Services</h5>
+                    <p class="text-stroke">Give you high quality services only with a little money</p>
+                </div>
+            </div>
         </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<hr />
+<form asp-action="Index" method="get">
+    <div class="row ">
+        <div class="col-sm-2 col-4">
+            <input class="form-control form-control-sm" type="text" name="name" placeholder="Tìm kiếm sản phẩm ..."/>
+        </div>
+        <div class="col-sm-2 col-4">
+            <select asp-items="@ViewBag.DanhMuc" name="categoryId" class="form-select form-select-sm">
+                <option value="0">-Tất cả danh mục-</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+    <br/>
 </form>
 <hr />
-<h6 class="text-center">@ViewBag.Found</h6>
-<div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center py-5">
+<div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-4 justify-content-center py-5">
     @{
         foreach (var item in Model)
         {
             <div class="col">
-                <div class="card  border-success h-100 text-truncate">
-                    <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top" width="100%" height="200" alt="Product Image"/>
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-transition" title="@Html.DisplayFor(model => item.Name)">@Html.DisplayFor(model => item.Name)</h5>
-                        <h6 class="card-subtitle mb-5 text-danger text-transition"
-                            title="@Html.DisplayFor(model => item.Description)">
-                            @Html.DisplayFor(model => item.Description)
-                        </h6>
-
-                        <h6 class="card-text text-success text-uppercase text-md-start">Giá: <span class="text-info fst-italic"> @Html.DisplayFor(model => item.Price)</span> $</h6>
+                    <div class="card h-100 text-truncate">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light">
+                                <img src="@Html.DisplayFor(model => item.Image)" class="card-img-top rounded-2" width="100%" height="200" alt="Product Image" />
+                                <div class="card-body text-center">
+                                    <h5 class="card-title text-transition text-dark" title="@Html.DisplayFor(model => item.Name)">@Html.DisplayFor(model => item.Name)</h5>
+                                    <h6 class="card-subtitle mb-5 text-danger text-transition"
+                                        title="@Html.DisplayFor(model => item.Description)">
+                                        @Html.DisplayFor(model => item.Description)
+                                    </h6>
+                                    <h6 class="card-text text-dark text-uppercase text-md-start"><span class="text-start fst-italic fw-bolder"> @Html.DisplayFor(model => item.Price)</span> &#8363;</h6>
+                                    @{
+                                        if (item.Price <= 10000)
+                                        {
+                                            <span class="badge bg-danger">Limited</span>
+                                        }
+                                        if (item.Name.Contains("Alin"))
+                                        {
+                                            <span class="badge bg-danger">Top Pick</span>
+                                        }
+                                    }
+                                </div>
+                            </a>
+                       
                     </div>
-                    <div class="card-footer bg-transparent  border-success">
-                        <a asp-action="Buy" asp-controller="Cart" asp-route-id="@item.Id" asp-route-name="@item.Name" asp-route-price="@item.Price" class="btn btn-success float-lg-start">Mua</a>
-                        <a asp-action="Details" class="btn btn-outline-info float-lg-end" asp-route-id="@item.Id">Details</a>
-                    </div>
-                </div>
             </div>
         }
     }

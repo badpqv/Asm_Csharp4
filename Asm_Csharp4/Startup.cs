@@ -25,7 +25,12 @@ namespace Asm_Csharp4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSession(c => c.IdleTimeout = TimeSpan.FromMinutes(1));
+            services.AddSession(c =>
+            {
+                c.IdleTimeout = TimeSpan.FromMinutes(60);
+                c.IOTimeout = TimeSpan.FromMinutes(1);
+                c.Cookie.Name = "Pham Viet";
+            });
             services.AddMvc(o=>o.EnableEndpointRouting=false);
             services.AddDbContext<DatabaseContext>(c =>
                 c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -56,7 +61,7 @@ namespace Asm_Csharp4
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action}/{temp?}",
-                    defaults:new {controller="Account",action="Index" }
+                    defaults:new {controller="Account",action="Login" }
                 );
                    
             });

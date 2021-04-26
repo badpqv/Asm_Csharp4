@@ -33,7 +33,7 @@ namespace Asm_Csharp4.Models
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
         [StringLength(50)]
-        [Display(Name = "Người dùng")]
+        [Display(Name = "Tên đăng nhập")]
         public string Username { get; set; }
         [StringLength(50)]
         [Display(Name = "Mật khẩu")]

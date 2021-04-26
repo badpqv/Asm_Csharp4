@@ -21,30 +21,29 @@ namespace Asm_Csharp4.Controllers
             _context = context;
             _iCustomerService = new CustomerService(_context);
         }
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
 
         }
-        [HttpPost]
-        public IActionResult Login(string user,string password)
+        [HttpPost,ActionName("login")]
+        public IActionResult ConfirmLogin(string user,string password)
         {
             var usr = _iCustomerService.GetListCustomers().FirstOrDefault(c=>c.Username==user&&c.Password == password);
             if (usr == null)
             {
-                TempData["Error"] = "Sai tên tài khoản hoặc mật khẩu";
-                return RedirectToAction("Index");
+                TempData["Error"] = "<script>alert('Sai tên tài khoản hoặc mật khẩu')</script>";
+                return View();
             }
             HttpContext.Session.SetString("Login","Welcome, " + user);
             HttpContext.Session.SetString("Username",user);
             logState = true;
              return RedirectToAction("Index","Home");
         }
-
-        public IActionResult Logout()
+        public IActionResult Register()
         {
          
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Create", "Customer");
         }
     }
 }
