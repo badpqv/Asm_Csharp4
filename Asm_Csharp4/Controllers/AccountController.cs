@@ -26,13 +26,13 @@ namespace Asm_Csharp4.Controllers
             return View();
 
         }
-        [HttpPost,ActionName("login")]
+        [HttpPost,ActionName("Login")]
         public IActionResult ConfirmLogin(string user,string password)
         {
-            var usr = _iCustomerService.GetListCustomers().FirstOrDefault(c=>c.Username==user&&c.Password == password);
+            var usr = _iCustomerService.GetListCustomers().FirstOrDefault(c=>c.Username.ToLower().Equals(user.ToLower())&&c.Password == password);
             if (usr == null)
             {
-                TempData["Error"] = "<script>alert('Sai tên tài khoản hoặc mật khẩu')</script>";
+                TempData["Error"] = "<span class='alert alert-danger'>Sai tên tài khoản hoặc mật khẩu</span>";
                 return View();
             }
             HttpContext.Session.SetString("Login","Welcome, " + user);

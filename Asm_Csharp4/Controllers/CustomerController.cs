@@ -23,7 +23,7 @@ namespace Asm_Csharp4.Controllers
         }
         public IActionResult Index()
         {
-             
+
             try
             {
                 var lstCustomers = _iCustomerService.GetListCustomers();
@@ -34,38 +34,28 @@ namespace Asm_Csharp4.Controllers
                 return View();
             }
         }
-        [HttpGet]
-        public IActionResult Details(int? id)
-        {
-             
-            var customer = _iCustomerService.GetById(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            return View(customer);
-        }
+    
         [HttpGet]
         public IActionResult Create()
         {
-             
+
             return View();
         }
 
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FullName","Email","SDT","CmndCCCD","Address","Username","Password","Quyen")] Customers customer)
+        public IActionResult Create([Bind("FullName", "Email", "SDT", "CmndCCCD", "Address", "Username", "Password", "Quyen")] Customers customer)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (customer.Id == 0)
-                    {
-                        _iCustomerService.Save(customer);
-                    }
+                    return View(customer);
                 }
-
+                if (customer.Id == 0)
+                {
+                    _iCustomerService.Save(customer);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -76,21 +66,22 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-             
+
             var customer = _iCustomerService.GetCustomerObj(id);
             return View(customer);
         }
 
-        [HttpPost,ActionName("Edit")]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public IActionResult EditCustomer(Customers customer)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
-                    _iCustomerService.Update(customer);
+                    return View(customer);
                 }
+                _iCustomerService.Update(customer);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -102,7 +93,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-             
+
             var customer = _iCustomerService.GetCustomerObj(id);
             return View(customer);
         }

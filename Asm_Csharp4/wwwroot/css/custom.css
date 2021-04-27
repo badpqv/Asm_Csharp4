@@ -11,37 +11,35 @@
     border: 0;
     background-color: transparent;
   }
-.text-transition {
-    animation-name: floatText;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
 .text-stroke {
     color: white;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-@-webkit-keyframes floatText {
-    from {
-        transform: translateX(-100%);
-    }
 
-    to {
-        transform: translateX(100%);
-    }
-}
 .card:hover {
     box-shadow: 1px 1px 5px #000;
 }
-.price-box {
-    background-color: lightgrey;
+.avatar {
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
-.text-truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
-
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    100% {
+        transform: rotate(360deg)
+    }
+}
 /*Dock footer to bottom of screen*/
 html {
     position: relative;

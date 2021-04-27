@@ -5,37 +5,37 @@
 @model Customers
 
 <h1 class="text-danger">Đăng kí người dùng mới</h1>
-<form asp-action="Create" autocomplete="off" class="form-group needs-validation" >
+<form asp-action="Create" autocomplete="off" method="post" >
     <div class="row">
         <div class="col-md-4">
             <label asp-for="FullName"></label>
-            <input asp-for="FullName" class="form-control" required />
-            <span class="invalid-feedback">Mời nhập tên người dùng</span>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName"></span>
             <label asp-for="Email"></label>
-            <input asp-for="Email" class="form-control" required />
-            <span class="invalid-feedback">Mời nhập email</span>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email"></span>
             <label asp-for="SDT"></label>
-            <input asp-for="SDT" class="form-control" required />
-            <span class="invalid-feedback">Mời nhập sđt</span>
+            <input asp-for="SDT" class="form-control" />
+            <span asp-validation-for="SDT"></span>
             <label asp-for="CmndCccd"></label>
-            <input asp-for="CmndCccd" class="form-control"  />
+            <input asp-for="CmndCccd" class="form-control" />
+            <span asp-validation-for="CmndCccd"></span>
             <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" required />
-            <span class="invalid-feedback">Mời nhập địa chỉ</span>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address"></span>
             <label asp-for="Username"></label>
-            <input asp-for="Username" class="form-control" required />
-            <span class="invalid-feedback">Mời nhập tên tài khoản</span>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username"></span>
             <label asp-for="Password"></label>
-            <input asp-for="Password" class="form-control" required />
-            <span class="invalid-feedback">Mời nhập mật khẩu</span>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password"></span>
             <label asp-for="Quyen"></label>
-            <input asp-for="Quyen" class="form-control" list="datalistOptions" required />
+            <input asp-for="Quyen" class="form-control" list="datalistOptions" />
             <datalist id="datalistOptions">
                 <option value="Người dùng" />
                 <option value="Admin" />
             </datalist>
-            <span class="invalid-feedback">Mời nhập quyền</span>
-
+            <span asp-validation-for="Quyen"></span>
         </div>
     </div>
 

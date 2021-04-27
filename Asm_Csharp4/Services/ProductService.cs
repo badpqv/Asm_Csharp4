@@ -67,6 +67,8 @@ namespace Asm_Csharp4.Services
             product.Price = products.Price;
             product.Image = products.Image;
             product.CategoryId = products.CategoryId;
+            product.isDiscount = products.isDiscount;
+            product.Discount = products.Discount;
             _context.Products.Update(product);
             _context.SaveChanges();
         }

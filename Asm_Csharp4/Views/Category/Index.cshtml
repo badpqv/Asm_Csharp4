@@ -8,7 +8,7 @@
 <hr />
 <span>@Html.Raw(@ViewData["Error"])</span>
 <div class="container">
-    <table class="table table-bordered  align-middle text-wrap table-responsive-sm">
+    <table class="table table-bordered  align-middle text-wrap table-responsive-lg">
         <thead class="table-danger">
         <tr class="text-center">
             <th>@Html.DisplayNameFor(model => model.Name)</th>
@@ -23,7 +23,6 @@
                     <td class="text-info">@Html.DisplayFor(model => item.Name)</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Id">Details</a>
                             <a asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">Sửa TT danh mục</a>
                             <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Xoá danh mục</a>
                         </div>

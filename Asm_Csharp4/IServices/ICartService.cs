@@ -11,13 +11,13 @@ namespace Asm_Csharp4.IServices
     {
         //Lấy danh sách hoá đơn
         List<Carts> GetListCart();
-        List<Carts> GetListCart(string userName);
+        List<Carts> GetListCart(int idCust);
         //Kiểm tra IdCart để thực hiện xoá
         bool CheckCartId(int id);
         //Kiểm tra sản phẩm có tồn tại trong giỏ hàng ko?
-        bool FindExistProduct(string name);
+        bool FindExistProduct(string name,int idCustomer);
         //Lấy số lượng sản phẩm hiện tại
-        int? GetCurrentQuantity(string name,string userName);
+        int GetCurrentQuantity(string name,string userName);
         //Chức năng
         void AddCart(Carts cart);
         void UpdateQuantity(Carts cart);

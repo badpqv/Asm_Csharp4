@@ -22,9 +22,8 @@ namespace Asm_Csharp4.Services
             _lstCarts = new List<Carts>();
             GetListCart();
         }
-        public List<Carts> GetListCart(string userName)
+        public List<Carts> GetListCart(int idCust)
         {
-            var idCust = _context.Customers.FirstOrDefault(c => c.Username == userName).Id;
             _lstCarts = _context.Carts.Where(c=>c.IdCustomer == idCust).ToList();
             return _lstCarts;
         }      
@@ -33,9 +32,9 @@ namespace Asm_Csharp4.Services
             _lstCarts = _context.Carts.ToList();
             return _lstCarts;
         }
-        public bool FindExistProduct(string name)
+        public bool FindExistProduct(string name,int idCustomer)
         {
-            return  _context.Carts.Any(c => c.ProductName.Equals(name));
+            return  _context.Carts.Any(c => c.ProductName.Equals(name) && c.IdCustomer == idCustomer);
         }
         public  void AddCart(Carts cart)
         {
@@ -51,7 +50,7 @@ namespace Asm_Csharp4.Services
             _context.Carts.Update(cart);
             _context.SaveChanges();
         }
-        public int? GetCurrentQuantity(string name,string userName)
+        public int GetCurrentQuantity(string name,string userName)
         {
             var idCust = _context.Customers.FirstOrDefault(c => c.Username == userName).Id;
             var cart = _context.Carts.Where(c => c.ProductName == name && c.IdCustomer == idCust).Select(c => c.Quantity).FirstOrDefault();

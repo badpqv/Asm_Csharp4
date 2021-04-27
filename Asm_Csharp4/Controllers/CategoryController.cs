@@ -39,17 +39,6 @@ namespace Asm_Csharp4.Controllers
             }
         }
         [HttpGet]
-        public IActionResult Details(int? id)
-        {
-             
-            var category = _iCategoryService.GetById(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
-        }
-        [HttpGet]
         public IActionResult Create()
         {
              
@@ -63,14 +52,14 @@ namespace Asm_Csharp4.Controllers
 
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
-                    if (category.Id == 0)
-                    {
-                        _iCategoryService.Save(category);
-                    }
+                    return View(category);
                 }
-
+                if (category.Id == 0)
+                {
+                    _iCategoryService.Save(category);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -94,11 +83,11 @@ namespace Asm_Csharp4.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
-                    _iCategoryService.Update(category);
+                    return View(category);
                 }
-
+                _iCategoryService.Update(category);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)

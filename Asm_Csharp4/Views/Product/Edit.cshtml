@@ -4,43 +4,15 @@
 }
 <h1 class="text-danger">Edit</h1>
 <h3 class="text-info">Sửa TT sản phẩm</h3>
-<hr/>
-        <form asp-action="Edit" autocomplete="off" class="row g-3 needs-validation" novalidate>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id"/>
-            <div class="row">
-                <div class="col-md-4">
-                        <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control"  required/>
-                    <span class="invalid-feedback">
-                        Nhập tên sp
-                    </span>
-                        <label asp-for="Description"></label>
-                        <input asp-for="Description" class="form-control" />
-                    </div>
-                <div class="col-md-4">
-                        <label asp-for="Price"></label>
-                    <input asp-for="Price" class="form-control"  required/>
-                    <span class="invalid-feedback">
-                        Nhập giá sp
-                    </span>
-                        <label asp-for="Image"></label>
-                        <input asp-for="Image" class="form-control"/>
-                </div>
-                <div class="col-sm-8">
-                    <label asp-for="CategoryId"></label>
-                    <select asp-for="CategoryId" asp-items="@ViewBag.DanhMuc" class="form-select" required>
-                        <option value="">-Chọn danh mục-</option>
-                    </select>
-                    <span class="invalid-feedback">
-                        Chọn 1 danh mục
-                    </span>
-                </div>
-                <div class="col-12 mt-5">
-                        <input type="submit" value="Cập nhật" class="btn btn-primary"/><br/>
-                        <a asp-action="Index">Back to list  </a>
-                </div>
-            </div>
-            <br/>
-  
-        </form>
+<hr />
+<form asp-action="Edit" autocomplete="off" class="row g-3" method="post" >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <partial name="_PartialNhapProduct" model="Model" />
+    <br />
+    <div class="col-sm-6">
+        <input type="submit" class="btn btn-primary" value="Cập nhật" />
+        <a asp-action="Index" class="nav-link">Back to list</a>
+        <span>@ViewData["Error"]</span>
+    </div>
+</form>

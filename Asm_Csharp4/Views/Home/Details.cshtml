@@ -1,15 +1,74 @@
-﻿@model Products
+﻿@model Tuple<Products,IEnumerable<Products>>
 @{
     ViewData["Title"] = "Home Page - Details Sản phẩm";
 }
 <h1>Details</h1>
 <h3>Thông tin sản phẩm</h3>
-<hr />
-<partial name="_PartialProductDetails" model="Model"/>
-<br />
-<div class="row">
-    <div class="col">
-           <a asp-action="Buy"  asp-route-name="@Model.Name" asp-route-price="@Model.Price" class="btn btn-danger">Chọn mua</a>
-        <a asp-action="Index" class="nav-link">Về trang chủ</a>
+<hr />  
+<div class="details-container">
+    <!--Left column - Product Image-->
+    <div class="left-column">
+        <img data-image="thumbnail" src="@Html.DisplayFor(model => model.Item1.Image)" alt="@Html.DisplayFor(model => model.Item1.Name)" width="200" height="180"/>
     </div>
+    <!--Right column -->
+    <div class="right-column">
+        <!--Description-->
+        @{
+            if (Model.Item1.isDiscount)
+            {
+                <span class="badge bg-danger rounded-pill">Limited</span>
+            }
+            if (Model.Item1.Name.Contains("Alin"))
+            {
+                <span class="badge bg-primary rounded-pill">Recommended</span>
+            }
+        }
+        <div class="product-description">
+            <span><select class="viewDanhMuc text-muted fw-bolder fs-5" asp-items="@ViewBag.DanhMuc" asp-for="@Model.Item1.CategoryId" disabled></select></span>
+            <h1>@Html.DisplayFor(model => model.Item1.Name)</h1>
+            <p>@Html.DisplayFor(model => model.Item1.Description)</p>
+        </div>
+      
+        <!--Pricing-->
+        <div class="product-price">
+            @{
+                if (Model.Item1.isDiscount)
+                {
+                    <span class="text-danger text-decoration-line-through me-2">@Html.DisplayFor(model => model.Item1.Price)</span>
+                    <span class="text-success text-decoration-none">@Html.DisplayFor(model => model.Item1.Discount) VNĐ</span>
+                    <br/>
+                    <a asp-action="Buy" asp-controller="Cart" asp-route-name="@Model.Item1.Name" asp-route-price="@Model.Item1.Discount" class="btn btn-primary">Chọn mua</a>
+                }
+                else
+                {
+                    <div class="col-sm-3">
+                        <span class="text-success me-2">@Html.DisplayFor(model => model.Item1.Price) VNĐ</span>
+                        <br/>
+                        <a asp-action="Buy" asp-controller="Cart" asp-route-name="@Model.Item1.Name" asp-route-price="@Model.Item1.Price" class="btn btn-primary d-inline-block">Chọn mua</a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <br/>
+   
 </div>
+<span class="text-muted ">Sản phẩm tương tự: </span>
+<div class="d-table">
+    @{
+        foreach (var item in Model.Item2)
+        {
+            if (Model.Item1.CategoryId == item.CategoryId && !Model.Item1.Name.Equals(item.Name))
+            {
+                <div class="d-table-cell">
+                    <a class="btn btn-outline-light me-2 d-inline-block w-25 py-0" asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@Html.DisplayFor(model => item.Image)" width="50" height="50" alt="..."  />
+                    </a>
+                </div>
+            }
+        }
+    }
+        
+</div>
+<br />
+<a asp-action="Index" class="nav-link">Về trang chủ</a>

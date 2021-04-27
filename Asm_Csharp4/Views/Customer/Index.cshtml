@@ -7,7 +7,7 @@
 <a asp-action="Create" class="btn btn-outline-info">Thêm người dùng mới</a>
 <hr/>
 <div class="container">
-    <table class="table table-bordered  align-middle text-center text-wrap table-responsive-sm">
+    <table class="table table-bordered  align-middle text-center text-wrap table-responsive-lg">
         <thead class="table-info">
         <tr>
             <th>@Html.DisplayNameFor(model=>model.FullName)</th>
@@ -35,7 +35,6 @@
                     <td class="text-info fst-italic">@Html.DisplayFor(model=>item.Quyen)</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.Id">Details</a>
                             <a asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">Sửa T T </a>
                             <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Xoá </a>
                         </div>

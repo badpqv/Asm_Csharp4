@@ -5,11 +5,12 @@
 @model Categories
 
 <h1 class="text-danger">Thêm danh mục mới</h1>
-<form asp-action="Create" autocomplete="off" class="form-group">
-    <div class="row">
+<form asp-action="Create" autocomplete="off" method="post">
+    <div class="row g-3">
         <div class="col-md-4">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name"></span>
         </div>
     </div>
     <br />

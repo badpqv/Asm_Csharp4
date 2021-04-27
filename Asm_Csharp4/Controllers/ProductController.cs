@@ -19,7 +19,7 @@ namespace Asm_Csharp4.Controllers
         private IProductService _iProductService;
         public ProductController(DatabaseContext context)
         {
-            
+
             _context = context;
             _iProductService = new ProductService(_context);
         }
@@ -41,66 +41,53 @@ namespace Asm_Csharp4.Controllers
         public IActionResult Search(string name, int categoryId)
         {
             ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
-            var products = _iProductService.GetListProduct();
+            var products = _iProductService.GetListProduct().OrderBy(c => c.CategoryId).ToList();
             if (name == null)
             {
                 name = "";
             }
             products = categoryId != 0 ? products.Where(c => c.Name.Contains(name) && c.CategoryId == categoryId).ToList() : products.Where(c => c.Name.Contains(name)).ToList();
-
-
-
             return View(products);
-        }
-        [HttpGet]
-        public IActionResult Details(int? id)
-        {
-             
-            var lstDanhMuc = new SelectList(_context.Categories, "Id", "Name");
-            ViewData["DanhMuc"] = lstDanhMuc;
-            var product = _iProductService.GetById(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-             
+
             var lstDanhMuc = new SelectList(_context.Categories, "Id", "Name");
             ViewData["DanhMuc"] = lstDanhMuc;
             return View();
         }
-
+        [HttpPost, ActionName(nameof(Create))]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateProduct([Bind("Name", "Description", "Price", "Image", "CategoryId")] Products product)
+        public IActionResult CreateProduct([Bind("Name", "Description", "Price", "Image", "CategoryId", "isDiscount", "Discount")] Products product)
         {
-             
             try
             {
-                if (ModelState.IsValid)
+                var lstDanhMuc = new SelectList(_context.Categories, "Id", "Name");
+                ViewData["DanhMuc"] = lstDanhMuc;
+                if (!ModelState.IsValid)
                 {
-                    if (product.Id == 0)
-                    {
-                        _iProductService.Save(product);
-                    }
+                    return View(product);
                 }
 
+                if (product.Id == 0)
+                {
+                    _iProductService.Save(product);
+
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException e)
             {
                 Console.WriteLine(e.Message);
-                return RedirectToAction(nameof(Index));
+                return View(product);
             }
         }
         [HttpGet]
         public IActionResult Edit(int id)
         {
-             
+
             ViewData["DanhMuc"] = new SelectList(_context.Categories, "Id", "Name");
 
             var product = _iProductService.GetProductsObj(id);
@@ -113,11 +100,12 @@ namespace Asm_Csharp4.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                ViewData["DanhMuc"] = new SelectList(_context.Categories, "Id", "Name");
+                if (!ModelState.IsValid)
                 {
-                    _iProductService.Update(product);
+                    return View(product);
                 }
-
+                _iProductService.Update(product);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -130,7 +118,7 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-             
+
             var product = _iProductService.GetProductsObj(id);
             return View(product);
         }

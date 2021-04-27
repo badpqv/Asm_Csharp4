@@ -30,8 +30,6 @@ namespace Asm_Csharp4.Controllers
 
         public IActionResult Index()
         {
-             
-
             var lstProduct = _iProductService.GetListProduct();
             return View(lstProduct);
         }
@@ -40,8 +38,8 @@ namespace Asm_Csharp4.Controllers
         {
             try
             {
-                ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
-                var products = _iProductService.GetListProduct();
+                ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name").OrderBy(c=>c.Text);
+                var products = _iProductService.GetListProduct().OrderBy(c=>c.CategoryId).ToList();
                 if (name == null)
                 {
                     name = "";
@@ -59,39 +57,12 @@ namespace Asm_Csharp4.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-             
             ViewBag.DanhMuc = new SelectList(_context.Categories, "Id", "Name");
             var product = _iProductService.GetById(id);
-            return View(product);
-        }
-      
-        public IActionResult Buy(string name, decimal price)
-        {
-            Carts carts;
-            var userName = HttpContext.Session.GetString("Username");
-            var idCust = _context.Customers.FirstOrDefault(c => c.Username == userName).Id;
-            if (_iCartService.GetListCart(userName).Count == 0)
-            {
-                carts = new Carts { ProductName = name, Price = price, Quantity = 1, IdCustomer = idCust };
-                _iCartService.AddCart(carts);
-            }
-            else
-            {
-                var soLuong = _iCartService.GetCurrentQuantity(name, userName);
-                var exist = _iCartService.FindExistProduct(name);
-                if (exist)
-                {
-                    carts = new Carts { ProductName = name, Price = price, Quantity = soLuong, IdCustomer = idCust };
-                    carts.Quantity++;
-                    _iCartService.UpdateQuantity(carts);
-                }
-                else
-                {
-                    carts = new Carts() { ProductName = name, Price = price, Quantity = 1, IdCustomer = idCust };
-                    _iCartService.AddCart(carts);
-                }
-            }
-            return RedirectToAction("Details");
+            var lstProduct = _iProductService.GetListProduct();
+            Tuple<Products, IEnumerable<Products>> products =
+                new Tuple<Products, IEnumerable<Products>>(product, lstProduct);
+            return View(products);
         }
 
     }

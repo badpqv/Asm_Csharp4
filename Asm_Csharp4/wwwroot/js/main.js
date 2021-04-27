@@ -1,20 +1,5 @@
-const inputs = document.querySelectorAll(".input");
-
-
-function addcl(){
-	let parent = this.parentNode.parentNode;
-	parent.classList.add("focus");
+var previewImage = function(event) {
+    var imgsrc = document.getElementById("inputSrc").value;
+    var imgPreviewer = document.getElementById("imgPreviewer");
+    imgPreviewer.src = imgsrc;
 }
-
-function remcl(){
-	let parent = this.parentNode.parentNode;
-	if(this.value == ""){
-		parent.classList.remove("focus");
-	}
-}
-
-
-inputs.forEach(input => {
-	input.addEventListener("focus", addcl);
-	input.addEventListener("blur", remcl);
-});
