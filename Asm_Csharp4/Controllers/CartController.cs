@@ -65,7 +65,6 @@ namespace Asm_Csharp4.Controllers
             {
                 carts = new Carts { ProductName = name, Price = price, Quantity = 1, IdCustomer = idCust };
                 _iCartService.AddCart(carts);
-                TempData["Added"] = "<span class='alert alert-success position-fixed bottom 0 end-0 p-3'>Đã thêm 1 sản phẩm @Model.Name vào giỏ hàng</span>";
             }
             else
             {
@@ -76,17 +75,15 @@ namespace Asm_Csharp4.Controllers
                     carts = new Carts { ProductName = name, Price = price, Quantity = soLuong, IdCustomer = idCust };
                     carts.Quantity++;
                     _iCartService.UpdateQuantity(carts);
-                    TempData["Added"] = "<span class='alert alert-success position-fixed bottom 0 end-0 p-3'>Đã thêm 1 sản phẩm @Model.Name vào giỏ hàng</span>";
                 }
                 else
                 {
                     carts = new Carts() { ProductName = name, Price = price, Quantity = 1, IdCustomer = idCust };
                     _iCartService.AddCart(carts);
-                    TempData["Added"] = "<span class='alert alert-success position-fixed bottom 0 end-0 p-3'>Đã thêm 1 sản phẩm @Model.Name vào giỏ hàng</span>";
                 }
             }
 
-            return RedirectToAction("Details","Home");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Checkout()

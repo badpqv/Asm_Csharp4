@@ -14,18 +14,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<------------Custom--------------------------->*@
     <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/fa-css/all.css" rel="stylesheet" />
     <link href="~/css/details.css" rel="stylesheet" />
 </head>
 <body onload="previewImage(event)">
     <header class=" justify-content-end">
         <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient py-2 ms-auto ">
             <a class="navbar-brand" href="#">
-                <img src="~/images/haxxor.png" class="rounded-circle avatar me-2" width="30" alt="..."/><span class="text-danger" >HB Shop</span>
+                <img src="~/images/haxxor.png" class="rounded-circle avatar me-2" width="30" alt="..." /><span class="text-danger">HB Shop</span>
             </a>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 float-lg-end float-sm-start justify-content-sm-start justify-content-end">
                 <li class="nav-item">
                     <span>
-                             <a href="#" class="nav-link link-primary">@Context.Session.GetString("Login")</a>
+                        <a href="#" class="nav-link link-primary">@Context.Session.GetString("Login")</a>
                     </span>
                 </li> |
                 <li class="nav-item">
@@ -38,61 +39,61 @@
             </ul>
         </nav>
     </header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient sticky-md-top py-2 ms-auto">
-    <div class="container-fluid">
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-grow-1 justify-content-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient sticky-md-top py-2 ms-auto">
+        <div class="container-fluid">
 
-                <li class="nav-item px-4">
-                    <a class="nav-link " aria-current="page" asp-controller="Home" asp-action="Index" title="Trang chủ">
-                        <img src="~/icons/house.svg" width="30"/>
-                    </a>
-                </li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-grow-1 justify-content-center">
 
-                <li class="nav-item px-4">
-                    <a class="nav-link" asp-controller="Product" asp-action="Index" title="Quản lý sản phẩm">
-                        <img src="~/icons/bag.svg" width="30" alt=""/>
-                    </a>
-                </li>
+                    <li class="nav-item px-4">
+                        <a class="nav-link " aria-current="page" asp-controller="Home" asp-action="Index" title="Trang chủ">
+                            <img src="~/icons/house.svg" width="30" />
+                        </a>
+                    </li>
 
-                <li class="nav-item px-4">
-                    <a class="nav-link" asp-controller="Category" asp-action="Index" title="Quản lý danh mục">
-                        <img src="~/icons/list-ol.svg" width="30" alt=""/>
-                    </a>
-                </li>
+                    <li class="nav-item px-4">
+                        <a class="nav-link" asp-controller="Product" asp-action="Index" title="Quản lý sản phẩm">
+                            <img src="~/icons/bag.svg" width="30" alt="" />
+                        </a>
+                    </li>
 
-                <li class="nav-item px-4">
-                    <a class="nav-link" asp-controller="Customer" asp-action="Index" title="Quản lý người dùng">
-                        <img src="~/icons/person.svg" width="30" alt=""/>
+                    <li class="nav-item px-4">
+                        <a class="nav-link" asp-controller="Category" asp-action="Index" title="Quản lý danh mục">
+                            <img src="~/icons/list-ol.svg" width="30" alt="" />
+                        </a>
+                    </li>
+
+                    <li class="nav-item px-4">
+                        <a class="nav-link" asp-controller="Customer" asp-action="Index" title="Quản lý người dùng">
+                            <img src="~/icons/person.svg" width="30" alt="" />
+                        </a>
+                    </li>
+                </ul>
+                <span class="d-flex">
+                    <a class="nav-link link-dark" asp-controller="Cart" asp-action="Index" title="Giỏ hàng">
+                        <img src="~/icons/cart4.svg" width="30" alt="" />
                     </a>
-                </li>
-            </ul>
-            <span class="d-flex">
-                <a class="nav-link link-dark" asp-controller="Cart" asp-action="Index" title="Giỏ hàng">
-                    <img src="~/icons/cart4.svg" width="30" alt=""/>
-                </a>
-            </span>
+                </span>
+            </div>
         </div>
+    </nav>
+    <div class="container-fluid">
+        <main>
+            @RenderBody()
+        </main>
     </div>
-</nav>
-<div class="container-fluid">
-    <main>
-        @RenderBody()
-    </main>
-</div>
-<footer class="text-center text-uppercase text-muted py-3 border-dark bg-light mt-auto">
-    <span>
-        &copy; by Phạm Việt - @DateTime.Now.Year
-    </span>
-</footer>
-<script src="~/js/site.js"></script>
-<script src="~/js/main.js"></script>
-
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="text-center text-uppercase text-muted py-3 border-dark bg-light mt-auto">
+        <span>
+            &copy; by Phạm Việt - @DateTime.Now.Year
+        </span>
+    </footer>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/fa-js/all.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
