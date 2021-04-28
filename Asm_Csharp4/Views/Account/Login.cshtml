@@ -12,7 +12,7 @@
     <link rel="icon" href="~/images/azusa.png" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/login.css" rel="stylesheet" />
-    <link href="~/css/all.css" rel="stylesheet" />
+    <link href="~/fa-css/all.css" rel="stylesheet" />
 </head>
 <body>
 <div class="login-container">
@@ -32,6 +32,9 @@
             <div class="inner">
             </div>
             <input type="submit" class="btn btn-primary" value="Đăng nhập"/>
+        </div>
+        <div class="text-center">
+            <a class="nav-link"  asp-action="Register">Đăng kí</a>
         </div>
         <div>
             @Html.Raw(@TempData["Error"])

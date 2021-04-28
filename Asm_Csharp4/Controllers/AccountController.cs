@@ -7,6 +7,7 @@ using Asm_Csharp4.Context;
 using Asm_Csharp4.IServices;
 using Asm_Csharp4.Services;
 using System.Web;
+using Asm_Csharp4.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace Asm_Csharp4.Controllers
@@ -26,6 +27,32 @@ namespace Asm_Csharp4.Controllers
             return View();
 
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost,ActionName("Register")]
+        public IActionResult ConfirmRegister([Bind("FullName", "Email", "SDT", "CmndCCCD", "Address", "Username", "Password", "Quyen")] Customers customer)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(customer);
+                }
+                if (customer.Id == 0)
+                {
+                    _iCustomerService.Save(customer);
+                    TempData["Success"] = "<span class='alert alert-success'>Đăng kí thành công</span>";
+                }
+                return View();
+            }
+            catch (Exception e)
+            {
+                return View(customer);
+            }
+        }
         [HttpPost,ActionName("Login")]
         public IActionResult ConfirmLogin(string user,string password)
         {
@@ -40,10 +67,6 @@ namespace Asm_Csharp4.Controllers
             logState = true;
              return RedirectToAction("Index","Home");
         }
-        public IActionResult Register()
-        {
-         
-            return RedirectToAction("Create", "Customer");
-        }
+       
     }
 }

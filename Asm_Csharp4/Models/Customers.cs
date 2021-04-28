@@ -19,8 +19,9 @@ namespace Asm_Csharp4.Models
         [StringLength(50)]
         [Display(Name = "Họ tên người dùng")]
         public string FullName { get; set; }
-        [Required(ErrorMessage = "Nhập email")]
         [Display(Name = "Email")]
+        [Required(ErrorMessage = "Nhập địa chỉ email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Địa chỉ email không hợp lệ")]
         [StringLength(50)]
         public string Email { get; set; }
         [Display(Name = "CMND / CCCD")]

@@ -21,39 +21,25 @@
 .card:hover {
     box-shadow: 1px 1px 5px #000;
 }
-.avatar {
-    animation-name: spin;
-    animation-duration: 4000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-@-moz-keyframes spin {
-    100% {
-        -moz-transform: rotate(360deg);
-    }
-}
-@keyframes spin {
-    100% {
-        transform: rotate(360deg)
-    }
-}
-/*Dock footer to bottom of screen*/
+
 html {
     position: relative;
     min-height: 100%;
 }
 
 body {
-    /* Margin bottom by footer height */
     margin-bottom: 60px;
+    background-color: #f4f4f4;
 }
-
-footer {
+.cart .nav-link {
+    color: black;
+    text-decoration: none
+}
+.cart .nav-link:hover {
+    color: lightseagreen;
+    text-decoration: none
+}
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;

@@ -42,14 +42,14 @@
                     <span class="text-danger text-decoration-line-through me-2">@Html.DisplayFor(model => model.Item1.Price)</span>
                     <span class="text-success text-decoration-none">@Html.DisplayFor(model => model.Item1.Discount) VNĐ</span>
                     <br/>
-                    <a asp-action="Buy" asp-controller="Cart" asp-route-name="@Model.Item1.Name" asp-route-price="@Model.Item1.Discount" class="btn btn-primary">Chọn mua</a>
+                    <a asp-action="Buy" asp-controller="Cart" asp-route-name="@Model.Item1.Name" asp-route-price="@Model.Item1.Discount" asp-route-image="@Model.Item1.Image" class="btn btn-primary">Chọn mua</a>
                 }
                 else
                 {
                     <div class="col-sm-3">
                         <span class="text-success me-2">@Html.DisplayFor(model => model.Item1.Price) VNĐ</span>
                         <br/>
-                        <a asp-action="Buy" asp-controller="Cart" asp-route-name="@Model.Item1.Name" asp-route-price="@Model.Item1.Price" class="btn btn-primary d-inline-block">Chọn mua</a>
+                        <a asp-action="Buy" asp-controller="Cart" asp-route-name="@Model.Item1.Name" asp-route-price="@Model.Item1.Price" asp-route-image="@Model.Item1.Image" class="btn btn-primary d-inline-block">Chọn mua</a>
                     </div>
                 }
             }

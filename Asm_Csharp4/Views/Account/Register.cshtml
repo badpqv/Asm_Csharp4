@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Đăng kí";
+    Layout = null;
+}
+@model Customers
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/images/azusa.png" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
+    <link href="~/fa-css/all.css" rel="stylesheet" />
+</head>
+<body>
+<div class="register-container">
+    <img src="~/images/haxxor.png" class="rounded img-thumbnail" width="70" alt="..."/>
+    <h1 class="text-center">Đăng kí</h1>
+    <p class="text-black-50">@@iefnaY</p>
+    <form asp-action="Register" autocomplete="off" method="post">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <label asp-for="FullName"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="SDT"></label>
+                <input asp-for="SDT" class="form-control" />
+                <span asp-validation-for="SDT" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="CmndCccd"></label>
+                <input asp-for="CmndCccd" class="form-control" />
+                <span asp-validation-for="CmndCccd" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Quyen"></label>
+                <input asp-for="Quyen" class="form-control" value="Người dùng"  readonly="readonly"/>
+            </div>
+        </div>
+        <div class="button">
+            <div class="inner">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Đăng kí"/>
+        </div>
+        <div class="text-center">
+            <a class="nav-link"  asp-action="Login">Quay lại trang đăng nhập</a>
+        </div>
+        @Html.Raw(@TempData["Success"])
+        <div>
+            @Html.Raw(@TempData["Error"])
+        </div>
+    </form>
+ 
+</div>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="~/js/all.js"></script>
+</body>
+</html>

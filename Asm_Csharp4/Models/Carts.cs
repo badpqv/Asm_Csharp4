@@ -23,7 +23,8 @@ namespace Asm_Csharp4.Models
         [Display(Name = "Số lượng")]
         public int Quantity { get; set; }
         public int IdCustomer { get; set; }
-
+        [Display(Name = "Hình ảnh")]
+        public string Image { get; set; }
         [ForeignKey(nameof(IdCustomer))]
         [InverseProperty(nameof(Customers.Carts))]
         public virtual Customers IdCustomerNavigation { get; set; }

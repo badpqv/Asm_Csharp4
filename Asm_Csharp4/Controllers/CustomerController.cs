@@ -48,7 +48,7 @@ namespace Asm_Csharp4.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return View(customer);
                 }
